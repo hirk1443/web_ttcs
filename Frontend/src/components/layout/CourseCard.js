@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const ProductCard = ({ course }) => {
+const CourseCard = ({ course }) => {
   const navigate = useNavigate();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
@@ -43,12 +43,14 @@ const ProductCard = ({ course }) => {
       <div className="mt-3">
         <div className="font-medium text-lg line-clamp-1 ">{course.name}</div>
 
-        <div className="flex items-center justify-between mt-2">
-          <span className="flex items-center">
-            {`${course?.sumDeThi} `}
-            Bài
-          </span>
-        </div>
+        <span className="flex items-center">
+          Giáo viên:
+          {` ${course?.teacher} `}
+        </span>
+        <span className="flex items-center">
+          {` ${course?.details.length} `} Bài
+        </span>
+
         <div className="flex items-center justify-between mt-4">
           <div className="py-2 px-7 w-full text-center bg-gradient-to-r from-orange-400 to-red-400 text-white rounded-full cursor-pointer hover:scale-105 transition-transform duration-300">
             <button>Xem chi tiết</button>
@@ -59,4 +61,4 @@ const ProductCard = ({ course }) => {
   );
 };
 
-export default ProductCard;
+export default CourseCard;

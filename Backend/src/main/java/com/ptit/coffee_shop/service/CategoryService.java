@@ -6,27 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ptit.coffee_shop.config.MessageBuilder;
-import com.ptit.coffee_shop.model.Course;
+import com.ptit.coffee_shop.model.Category;
 import com.ptit.coffee_shop.payload.response.RespMessage;
-import com.ptit.coffee_shop.repository.CourseRepository;
+import com.ptit.coffee_shop.repository.CategoryRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CourseService {
+public class CategoryService {
+
     @Autowired
-    private CourseRepository courseRepository;
+    private CategoryRepository categoryRepository;
+
     @Autowired
     private MessageBuilder messageBuilder;
 
-    public RespMessage getAllCourses() {
-        List<Course> courses = courseRepository.findAll();
-        return messageBuilder.buildSuccessMessage(courses);
-    }
-
     public RespMessage getAllCategories() {
-        List<Course> categories = courseRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
         return messageBuilder.buildSuccessMessage(categories);
     }
 }

@@ -3,53 +3,15 @@ import React from "react";
 const Logo = () => {
   return (
     <div className="flex items-center space-x-2">
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="32" height="32" fill="#E5E5E5" />
-        <g id="Top bar">
-          <rect
-            x="-69.5"
-            y="-58.5"
-            width="1479"
-            height="286"
-            rx="4.5"
-            stroke="#9747FF"
-            strokeDasharray="10 5"
-          />
-          <g id="Dark=off">
-            <g id="Top bar_2">
-              <rect
-                width="1440"
-                height="110"
-                transform="translate(-50 -39)"
-                fill="#EEEEEE"
-              />
-              <g id="Main">
-                <g id="1">
-                  <g id="Logo - UIHUT">
-                    <g id="Icon">
-                      <path
-                        id="Vector"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M4.79999 0H27.2L32 8V30.4C32 31.2837 31.2837 32 30.4 32H1.6C0.716344 32 0 31.2837 0 30.4V8L4.79999 0ZM2.79886 8H29.2011L25.8411 2.4H6.15888L2.79886 8ZM8 12.4C8.66272 12.4 9.2 12.9373 9.2 13.6C9.2 17.3555 12.2445 20.4 16 20.4C19.7555 20.4 22.8 17.3555 22.8 13.6C22.8 12.9373 23.3373 12.4 24 12.4C24.6627 12.4 25.2 12.9373 25.2 13.6C25.2 18.681 21.081 22.8 16 22.8C10.919 22.8 6.8 18.681 6.8 13.6C6.8 12.9373 7.33728 12.4 8 12.4Z"
-                        fill="#77DAE6"
-                      />
-                    </g>
-                  </g>
-                </g>
-              </g>
-            </g>
-          </g>
-        </g>
-      </svg>
+      <img
+        src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/480444026_122093622872782670_4295889166694306543_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH4lsy-KBdgr8OXx0q1Jim27qEF41ppvVHuoQXjWmm9Uc6VbIR_qHhkOSXdpnlGn2x4cdIz04OVXekDzIMcspTX&_nc_ohc=LIqU1NxOF9EQ7kNvwG3xN7U&_nc_oc=AdloDiux1VF5yXCSY1cgPyde8FaEDI5s2iBQGDHl05AKiaWLWz8bWtNBbd1hpBnnXaKYqz3YBYkYzEMJsnL5RoHj&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=m8GpUnlvp5s5zEG5nOst9w&oh=00_AfHoE9rDTQWiNftxBE05D3GNrbKFcFqAQjO-j1qfxxQEJg&oe=68014546"
+        width={50}
+        height={50}
+      ></img>
 
-      <h1 className="text-lg font-semibold text-gray-900 dark:text-white">Coffee Shop</h1>
+      <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+        Course Sharing
+      </h1>
     </div>
   );
 };

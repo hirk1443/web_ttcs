@@ -1,21 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react";
-import ProductCard from "../layout/ProductCard";
 import { useRef } from "react";
 import { Pagination } from "antd";
+import CourseCard from "../layout/CourseCard";
 
-const ListProduct = ({ course: initialProducts, title }) => {
+const ListCourses = ({ course: initialProducts, title }) => {
   const titleRef = useRef();
-  const [products, setProducts] = useState(initialProducts || []);
+  const [course, setProducts] = useState(initialProducts || []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
-  const productList = products;
+  const courseList = course;
 
-  const currentProducts = useMemo(() => {
+  const currentCourses = useMemo(() => {
     const indexLast = currentPage * itemsPerPage;
     const indexFirst = indexLast - itemsPerPage;
-    return productList.slice(indexFirst, indexLast);
-  }, [currentPage, itemsPerPage, productList]);
+    return courseList.slice(indexFirst, indexLast);
+  }, [currentPage, itemsPerPage, courseList]);
 
   useEffect(() => {
     setProducts(initialProducts);
@@ -38,18 +38,18 @@ const ListProduct = ({ course: initialProducts, title }) => {
       {title && (
         <div>
           <h2 ref={titleRef} className="font-bold text-base ">
-            {`${title} ( ${productList.length} )`}
+            {`${title} ( ${courseList.length} )`}
           </h2>
         </div>
       )}
-      {productList.length === 0 ? (
+      {courseList.length === 0 ? (
         <div className="text-center text-lg font-bold text-gray-500 mt-5">
           No results found
         </div>
       ) : (
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2 lg:gap-6 md:gap-3 gap-2 mt-5 ">
-          {currentProducts.map((course, index) => (
-            <ProductCard course={course} key={index} />
+          {currentCourses.map((course, index) => (
+            <CourseCard course={course} key={index} />
           ))}
         </div>
       )}
@@ -57,7 +57,7 @@ const ListProduct = ({ course: initialProducts, title }) => {
       <div className="flex justify-center mt-4">
         <Pagination
           current={currentPage}
-          total={productList.length}
+          total={courseList.length}
           onChange={handlePageChange}
           pageSize={itemsPerPage}
           showSizeChanger={false}
@@ -67,4 +67,4 @@ const ListProduct = ({ course: initialProducts, title }) => {
   );
 };
 
-export default ListProduct;
+export default ListCourses;

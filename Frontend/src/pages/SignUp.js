@@ -14,7 +14,6 @@ import PasswordInput from "../components/validateInputForm/PasswordInput";
 import EmailInput from "../components/validateInputForm/EmailInput";
 import { LoadingOutlined } from "@ant-design/icons";
 
-
 const SignUp = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
@@ -87,8 +86,7 @@ const SignUp = () => {
         }
       } catch (error) {
         console.log("Error SignUp", error);
-      }
-      finally {
+      } finally {
         setIsLoading(false);
       }
     } else {
@@ -101,19 +99,18 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <div className="bg-gray-100 md:w-1/2 md:flex hidden items-center justify-center p-8">
+      <div className="bg-gray-100 hidden md:w-1/2 md:flex items-center justify-center p-8">
         <div className="w-96 h-80 ">
-          <img src={img_login} alt="img-Login" className="" />
+          {/* <img src={img_login} alt="img-Login" className="" /> */}
           <p className="text-lg font-sans mb-4 mt-12 text-center">
-            The best of luxury brand values, high quality products, and
-            innovative services.
+            Tất cả khóa học đều miễn phí, bạn có thể đóng góp thêm tài liệu bằng
+            cách đăng nhập
           </p>
         </div>
       </div>
 
       <div className="bg-white md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-
           <div className="flex justify-center  ">
             <Link to="/">
               <Logo />
@@ -121,41 +118,44 @@ const SignUp = () => {
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold mt-12 text-center ">Sign Up</h1>
+            <h1 className="text-3xl font-bold mt-12 text-center ">Đăng ký</h1>
 
             <p className="mt-3 mb-14 text-gray-400 text-center text-sm">
-              Let’s create your account and Shop like a pro and save money.
+              Đóng góp và đánh tài liệu cho cộng đồng ngay bây giờ
             </p>
           </div>
 
           <form className="space-y-5" onSubmit={handleSubmit}>
-            <EmailInput onEmailChange={handleOnchange} setErrors={setEmailError} />
+            <EmailInput
+              onEmailChange={handleOnchange}
+              setErrors={setEmailError}
+            />
             <PasswordInput
-              label={"Password"}
-              placeholder={"Enter password"}
+              label={"Mật khẩu"}
+              placeholder={"Nhập mật khẩu"}
               name={"password"}
               onChange={handleOnchange}
               setErrors={setPasswordError}
             />
 
             <PasswordInput
-              label={"Confirm Password"}
-              placeholder={"Enter confirmPassword"}
+              label={"Xác nhận mật khẩu"}
+              placeholder={"Nhập lại mật khẩu"}
               name={"confirmPassword"}
               onChange={handleOnchange}
               setErrors={setPasswordError}
-
             />
             {error && <p className="text-sm text-red-500 my-2">{error}</p>}
 
             <button
               type="submit"
-              className={`w-full py-2 px-4 text-white font-semibold rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${isLoading
-                ? "bg-gray-300 cursor-wait"
-                : (passwordError || emailError)
+              className={`w-full py-2 px-4 text-white font-semibold rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                isLoading
+                  ? "bg-gray-300 cursor-wait"
+                  : passwordError || emailError
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-gradient-to-r from-teal-500 via-teal-300 to-teal-500 transition-all duration-500 ease-in-out bg-[length:200%_auto] hover:bg-[position:right_center]"
-                }`}
+              }`}
               disabled={isLoading || passwordError || emailError}
             >
               {isLoading ? (
@@ -167,15 +167,14 @@ const SignUp = () => {
                 "Sign Up"
               )}
             </button>
-
           </form>
 
           <div className="flex items-center mt-5 space-x-3 justify-center">
             <span className=" text-center text-gray-500">
-              You have an account yet?{" "}
+              Đã có tài khoản?{" "}
             </span>
             <Link to="/login">
-              <span className="text-blue-600 hover:underline">Sign In</span>.
+              <span className="text-blue-600 hover:underline">Đăng nhập</span>.
             </Link>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import summaryApi from "../common";
-import ListProduct from "../components/homepage/ListProduct";
+import ListCourses from "../components/homepage/ListCourses";
 import Filter from "../components/homepage/Filter";
 import { Spin } from "antd";
 
@@ -83,7 +83,7 @@ const SearchProduct = () => {
             </div>
           ) : (
             <div className="lg:col-start-4 lg:col-span-9 md:col-start-5 md:col-span-8  col-span-12">
-              <ListProduct products={productList} title={title} />
+              <ListCourses products={productList} title={title} />
             </div>
           )}
         </div>
