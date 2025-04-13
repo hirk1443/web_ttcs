@@ -17,10 +17,9 @@ import lombok.NoArgsConstructor;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long commentId;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToMany (mappedBy = "user")
     private User author;
 
     @Column(name = "content")

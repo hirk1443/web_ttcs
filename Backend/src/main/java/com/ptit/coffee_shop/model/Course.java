@@ -29,6 +29,6 @@ public class Course {
     private String teacher;
 
     @OneToMany
-    @JoinColumn(name = "details_id")
+    @JoinColumn(name = "id")
     private List<Details> details;
 }

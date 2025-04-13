@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Details {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long detailsId;
 
     @Column(name = "name")
     private String name;
@@ -33,7 +33,6 @@ public class Details {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @OneToMany
-    @JoinColumn(name = "id")
+    @ManyToMany(mappedBy = "content")
     private List<Content> contents;
 }

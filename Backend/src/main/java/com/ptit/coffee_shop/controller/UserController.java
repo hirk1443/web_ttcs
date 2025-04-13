@@ -23,7 +23,7 @@ public class UserController {
     @Autowired
     private MessageBuilder messageBuilder;
     @GetMapping("/all")
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> getAllUsers() {
         try
         {

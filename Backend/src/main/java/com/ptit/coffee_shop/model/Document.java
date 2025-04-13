@@ -17,7 +17,7 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long documentId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -36,7 +36,6 @@ public class Document {
     @Column(name = "created_at")
     private Date created_at;
 
-    @OneToMany
-    @JoinColumn(name = "content_id")
+    @OneToMany(mappedBy = "content")
     private List<Content> contents;
 }

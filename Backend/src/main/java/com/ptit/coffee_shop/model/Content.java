@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Content {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long contentId;
 
     @Column(name = "title")
     private String title;
@@ -35,8 +35,7 @@ public class Content {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @OneToMany
-    @JoinColumn(name = "comment_id")
+    @ManyToMany(mappedBy = "comment")
     private List<Comment> comments;
 
 }
