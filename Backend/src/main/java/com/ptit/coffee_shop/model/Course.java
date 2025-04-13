@@ -3,6 +3,10 @@ package com.ptit.coffee_shop.model;
 
 import java.util.List;
 
+import org.hibernate.mapping.Join;
+
+import com.ptit.coffee_shop.common.enums.CategoryEnum;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +25,7 @@ public class Course {
     @Column(name = "name")
     private String name;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -29,6 +33,6 @@ public class Course {
     private String teacher;
 
     @OneToMany
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "details_id")
     private List<Details> details;
 }

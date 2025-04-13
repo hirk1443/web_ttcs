@@ -1,7 +1,6 @@
 
 package com.ptit.coffee_shop.model;
 
-
 import com.ptit.coffee_shop.common.enums.CategoryEnum;
 
 import jakarta.persistence.*;
@@ -17,10 +16,10 @@ import lombok.NoArgsConstructor;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long categoryId;
+    private long id;
 
     @Column(name = "name")
     @Enumerated(EnumType.STRING)
     private CategoryEnum name;
-    
+
 }

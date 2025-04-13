@@ -26,13 +26,18 @@ public class CourseController {
     public ResponseEntity<String> getAllCourses() {
         try {
             RespMessage respMessage = courseService.getAllCourses();
-            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
+            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
+                    HttpStatus.OK);
         } catch (CoffeeShopException e) {
-            RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
-            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
+            RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
+                    e.getObjects(), e.getMessage());
+            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
+                    HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            RespMessage respMessage = messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null, e.getMessage());
-            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.INTERNAL_SERVER_ERROR);
+            RespMessage respMessage = messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null,
+                    e.getMessage());
+            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

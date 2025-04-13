@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,7 +43,7 @@ public class User implements UserDetails {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @Column(name= "phone")
+    @Column(name = "phone")
     private String phone;
 
     @Column(name = "name")
@@ -61,7 +62,8 @@ public class User implements UserDetails {
     @PrePersist
     public void prePersist() {
         created_at = new Date();
-        if (updated_at == null) updated_at = created_at;
+        if (updated_at == null)
+            updated_at = created_at;
     }
 
     @PreUpdate
@@ -84,14 +86,14 @@ public class User implements UserDetails {
     }
 
     // public ProfileResponse toProfileResponse() {
-    //     return ProfileResponse.builder()
-    //             .id(id)
-    //             .email(email)
-    //             .name(name)
-    //             .phone(phone)
-    //             .profile_img(profile_img)
-    //             .created_at(created_at)
-    //             .build();
+    // return ProfileResponse.builder()
+    // .id(id)
+    // .email(email)
+    // .name(name)
+    // .phone(phone)
+    // .profile_img(profile_img)
+    // .created_at(created_at)
+    // .build();
     // }
 
     public UserStatisticResponse toStatistic() {

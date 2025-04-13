@@ -1,7 +1,5 @@
 package com.ptit.coffee_shop.model;
 
-
-
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Details {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long detailsId;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -26,13 +24,13 @@ public class Details {
     @Column(name = "description")
     private String description;
 
-
     @Column(name = "created_at")
     private Date created_at;
 
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @ManyToMany(mappedBy = "content")
+    @OneToMany()
+    @JoinColumn(name = "content_id")
     private List<Content> contents;
 }

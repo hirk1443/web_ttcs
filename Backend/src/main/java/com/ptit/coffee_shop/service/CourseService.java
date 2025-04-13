@@ -12,7 +12,6 @@ import com.ptit.coffee_shop.repository.CourseRepository;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -21,9 +20,8 @@ public class CourseService {
     @Autowired
     private MessageBuilder messageBuilder;
 
-
     public RespMessage getAllCourses() {
-        List<Course> courses = courseRepository.getAllCourse();
+        List<Course> courses = courseRepository.findAll();
         return messageBuilder.buildSuccessMessage(courses);
     }
 }

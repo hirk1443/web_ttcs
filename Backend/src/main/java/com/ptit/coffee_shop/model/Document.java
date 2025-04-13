@@ -3,6 +3,8 @@ package com.ptit.coffee_shop.model;
 import java.util.Date;
 import java.util.List;
 
+import com.ptit.coffee_shop.common.enums.CategoryEnum;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,13 +19,13 @@ public class Document {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long documentId;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -36,6 +38,7 @@ public class Document {
     @Column(name = "created_at")
     private Date created_at;
 
-    @OneToMany(mappedBy = "content")
+    @OneToMany()
+    @JoinColumn(name = "content_id")
     private List<Content> contents;
 }

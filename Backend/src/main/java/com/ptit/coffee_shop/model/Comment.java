@@ -1,7 +1,5 @@
 package com.ptit.coffee_shop.model;
 
-
-
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -17,13 +15,14 @@ import lombok.NoArgsConstructor;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commentId;
+    private long id;
 
-    @OneToMany (mappedBy = "user")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User author;
 
-    @Column(name = "content")
-    private String content;
+    @Column(name = "body")
+    private String body;
 
     @Column(name = "created_at")
     private Date created_at;

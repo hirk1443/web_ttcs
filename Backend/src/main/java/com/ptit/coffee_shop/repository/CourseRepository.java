@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
-    
-    @Query("select * from course")
-    List<Course> getAllCourse();
+
+    // @Query("select * from course c")
+    List<Course> findAll();
 }
