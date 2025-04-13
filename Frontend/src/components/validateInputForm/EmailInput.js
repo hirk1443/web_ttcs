@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import InPutForm from "./InPutForm";
 
-function EmailInput({ onEmailChange , setErrors}) {
+function EmailInput({ onEmailChange, setErrors }) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  
 
   const validateEmail = (value) => {
-    const emailRegex = /^(([^<>()[\],;:\s@"]+(\.[^<>()[\],;:\s@"]+)*)|(".+"))@(([^<>()[\],;:\s@"]+\.)+[^<>()[\],;:\s@"]{2,})$/i;
+    const emailRegex =
+      /^(([^<>()[\],;:\s@"]+(\.[^<>()[\],;:\s@"]+)*)|(".+"))@(([^<>()[\],;:\s@"]+\.)+[^<>()[\],;:\s@"]{2,})$/i;
     return emailRegex.test(value);
   };
 
   const handleBlur = () => {
-    if(!validateEmail(email)) {
-      setError("Email không hợp lệ")
+    if (!validateEmail(email)) {
+      setError("Email không hợp lệ");
       setErrors(true);
-    }else {
+    } else {
       setError(false);
       setErrors(false);
     }
-  }
+  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -34,7 +34,7 @@ function EmailInput({ onEmailChange , setErrors}) {
         label="Email"
         type="email"
         name="email"
-        placeholder="Enter your email"
+        placeholder="Email"
         value={email}
         onChange={handleChange}
         onBlur={handleBlur}

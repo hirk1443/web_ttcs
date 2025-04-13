@@ -13,7 +13,10 @@ import Cookies from "js-cookie";
 function App() {
   const dispatch = useDispatch();
   // Để tránh việc fetch user details nhiều lần
-  const user = useSelector((state) => state.user.user, (prev, next) => prev === next);
+  const user = useSelector(
+    (state) => state.user.user,
+    (prev, next) => prev === next
+  );
   const fetchUserDetails = useCallback(async () => {
     dispatch(setLoading(true));
     const token = Cookies.get("token");
@@ -86,11 +89,6 @@ function App() {
       fetchUserDetails();
     }
   }, [fetchUserDetails, user]);
-
-  useEffect(() => {
-    document.title = 'Coffee Shop';
-  }, []);
-
 
   return (
     <Context.Provider value={{ fetchUserDetails }}>

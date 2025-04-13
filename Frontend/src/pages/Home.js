@@ -6,7 +6,7 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import Slideshow from "../components/homepage/Slideshow";
 import ListCategory from "../components/homepage/ListCategory";
-import ListProduct from "../components/homepage/ListProduct";
+import ListCourses from "../components/homepage/ListCourses";
 import { useDispatch, useSelector } from "react-redux";
 
 import summaryApi from "../common";
@@ -21,36 +21,61 @@ const Home = () => {
     (state) => state.user.user,
     (prev, next) => prev === next
   );
-  const [products, setProducts] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  const [isCourseLoading, setIsProductsLoading] = useState(false);
+  const [isCourseLoading, setIsCourseLoading] = useState(false);
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProduct = async () => {
+    const fetchCourse = async () => {
       try {
-        setIsProductsLoading(true);
-        const productResponse = await fetch(summaryApi.allCourse.url, {
+        setIsCourseLoading(true);
+        const courseResponse = await fetch(summaryApi.allCourse.url, {
           method: summaryApi.allCourse.method,
           headers: {
             "Content-Type": "application/json",
           },
         });
 
-        const productResult = await productResponse.json();
+        const courseResult = await courseResponse.json();
 
-        if (productResult.respCode === "000") {
-          setProducts(productResult.data);
+        if (courseResult.respCode === "000") {
+          setCourses(courseResult.data);
         }
       } catch (error) {
         console.log("error", error);
       } finally {
-        setIsProductsLoading(false);
+        setIsCourseLoading(false);
       }
     };
-    fetchProduct();
+    fetchCourse();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setIsCategoriesLoading(true);
+        const categoriesResponse = await fetch(summaryApi.allCategory.url, {
+          method: summaryApi.allCategory.method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const categoriesResult = await categoriesResponse.json();
+
+        if (categoriesResult.respCode === "000") {
+          setCategories(categoriesResult.data);
+        }
+      } catch (error) {
+        console.log("error", error);
+      } finally {
+        setIsCategoriesLoading(false);
+      }
+    };
+    fetchCategories();
   }, []);
 
   if (user?.roleName === "ROLE_ADMIN") {
@@ -59,7 +84,7 @@ const Home = () => {
     return (
       <>
         <Header />
-        <div className="mt-32"></div>
+        <div className="mt-16"></div>
         {location.pathname !== "/profile" && <BreadcrumbNav />}
         <main className="container mx-auto ">
           {location.pathname === "/" && (
@@ -89,7 +114,7 @@ const Home = () => {
                       />
                     </div>
                   ) : (
-                    <ListProduct course={products} title={"All products"} />
+                    <ListCourses course={courses} title={"Tất cả khoá học"} />
                   )}
                 </div>
               </div>
@@ -100,6 +125,7 @@ const Home = () => {
             <ChatWidget />
           </section>
         </main>
+        <Footer />
       </>
     );
   }

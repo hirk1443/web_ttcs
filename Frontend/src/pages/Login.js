@@ -39,8 +39,6 @@ const SignIn = () => {
     });
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -75,38 +73,32 @@ const SignIn = () => {
     <div className="flex flex-col md:flex-row h-screen">
       <div className="bg-gray-100 hidden md:w-1/2 md:flex items-center justify-center p-8">
         <div className="w-96 h-80 ">
-          <img src={img_login} alt="img-Login" className="" />
+          {/* <img src={img_login} alt="img-Login" className="" /> */}
           <p className="text-lg font-sans mb-4 mt-12 text-center">
-            The best of luxury brand values, high quality products, and
-            innovative services.
+            Tất cả khóa học đều miễn phí, bạn có thể đóng góp thêm tài liệu bằng
+            cách đăng nhập
           </p>
         </div>
       </div>
 
       <div className="bg-white md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          <div className="flex justify-center  ">
-            <Link to="/">
-              <Logo />
-            </Link>
-          </div>
-
-          <h1 className="text-3xl font-bold mt-12 text-center ">
-            Hello Again!
-          </h1>
+          <h1 className="text-3xl font-bold mt-12 text-center ">Đăng nhập</h1>
 
           <p className="mt-3 mb-14 text-gray-400 text-center text-sm">
-            Welcome back to sign in. As a returning customer, you have access to
-            your previously saved all information.
+            Đăng nhập để có thể bình luận, đăng tài liệu, và hơn thế nữa
           </p>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {errors && (<p className="text-sm text-red-500 my-2 ">{errors}</p>)}
-            <EmailInput onEmailChange={handleOnchange} setErrors={setEmailError} />
+            {errors && <p className="text-sm text-red-500 my-2 ">{errors}</p>}
+            <EmailInput
+              onEmailChange={handleOnchange}
+              setErrors={setEmailError}
+            />
 
             <PasswordInput
-              label={"Password"}
-              placeholder={"Enter password"}
+              label={"Mật khẩu"}
+              placeholder={"Nhập mật khẩu"}
               name={"password"}
               onChange={handleOnchange}
               setErrors={setPasswordError}
@@ -116,7 +108,7 @@ const SignIn = () => {
               <div>
                 <Link to="/forgot-password">
                   <span className="text-sm text-blue-600 font-medium hover:underline">
-                    Forgot Password
+                    Não cá vàng?
                   </span>
                 </Link>
               </div>
@@ -124,12 +116,13 @@ const SignIn = () => {
 
             <button
               type="submit"
-              className={`w-full py-2 px-4 text-white font-semibold rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${isLoading
-                ? "bg-gray-300 cursor-wait"
-                : passwordError || emailError || errors
+              className={`w-full py-2 px-4 text-white font-semibold rounded-md shadow focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                isLoading
+                  ? "bg-gray-300 cursor-wait"
+                  : passwordError || emailError || errors
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-gradient-to-r from-teal-500 via-teal-300 to-teal-500 transition-all duration-500 ease-in-out bg-[length:200%_auto] hover:bg-[position:right_center]"
-                }`}
+              }`}
               disabled={isLoading || passwordError || emailError || errors}
             >
               {isLoading ? (
@@ -138,19 +131,20 @@ const SignIn = () => {
                   <span className="ml-2">Signing in...</span>
                 </div>
               ) : (
-                "Sign in"
+                "Đăng nhập"
               )}
             </button>
-
-
           </form>
 
           <div className="flex items-center mt-6 space-x-3 justify-center">
             <span className=" text-center text-gray-500">
-              Don’t have an account yet?
+              Chưa có tài khoản?
             </span>
             <Link to="/sign-up">
-              <span className="text-blue-600 hover:underline">Sign Up</span>.
+              <span className="text-blue-600 hover:underline">
+                Đăng ký ngay
+              </span>
+              .
             </Link>
           </div>
         </div>
