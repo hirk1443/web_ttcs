@@ -21,6 +21,9 @@ public class Details {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "image")
+    private String imageURL;
+
     @Column(name = "description")
     private String description;
 

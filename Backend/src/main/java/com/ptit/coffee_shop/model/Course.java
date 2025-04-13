@@ -25,6 +25,9 @@ public class Course {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "image")
+    private String imageURL;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
