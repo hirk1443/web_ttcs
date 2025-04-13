@@ -125,6 +125,7 @@ const Home = () => {
             <ChatWidget />
           </section>
         </main>
+        <Footer />
       </>
     );
   }

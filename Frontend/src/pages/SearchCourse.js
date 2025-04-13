@@ -5,22 +5,12 @@ import ListCourses from "../components/homepage/ListCourses";
 import Filter from "../components/homepage/Filter";
 import { Spin } from "antd";
 
-const SearchProduct = () => {
+const SearchCourse = () => {
   const location = useLocation();
-  const [products, setProducts] = useState([]);
+  const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [onClickFilter, setOnClickFilter] = useState(false);
-
-  const handleFilterProducts = (filtered) => {
-    setFilteredProducts(filtered);
-  };
-  const handleClickFilter = () => {
-    setOnClickFilter(true);
-  };
-  const productList = useMemo(() => {
-    return filteredProducts.length > 0 ? filteredProducts : products;
-  }, [filteredProducts, products]);
 
   const queryParams = new URLSearchParams(location.search);
   const searchTerm = queryParams.get("q");
@@ -31,16 +21,16 @@ const SearchProduct = () => {
 
     try {
       const response = await fetch(
-        summaryApi.searchProduct.url + `?q=${searchTerm}`,
+        summaryApi.searchCourse.url + `?q=${searchTerm}`,
         {
-          method: summaryApi.searchProduct.method,
+          method: summaryApi.searchCourse.method,
         }
       );
       const dataResponse = await response.json();
       if (dataResponse.respCode === "000") {
-        setProducts(dataResponse.data);
+        setCourse(dataResponse.data);
       } else {
-        setProducts([]);
+        setCourse([]);
         console.log("Error fetching search data");
       }
     } catch (error) {
@@ -54,7 +44,7 @@ const SearchProduct = () => {
     fetchSearchProduct();
   }, [fetchSearchProduct]);
 
-  const title = `Sản Phẩm liên quan đến "${searchTerm}" :`;
+  const title = `Khóa học liên quan đến "${searchTerm}" :`;
 
   return (
     <div className="container mx-auto">
@@ -66,16 +56,12 @@ const SearchProduct = () => {
         <div className="grid grid-cols-12 lg:gap-x-10 gap-x-3">
           <div className="lg:col-span-3 md:col-span-4 col-span-12 mt-10 sm:min-h-screen">
             <div className="sticky top-28 ">
-              <Filter
-                onFilter={handleFilterProducts}
-                products={products}
-                onClickFilter={handleClickFilter}
-              />
+              <Filter />
             </div>
           </div>
 
           {(filteredProducts.length === 0 && onClickFilter) ||
-          productList.length === 0 ? (
+          course.length === 0 ? (
             <div className="lg:col-start-4 lg:col-span-9 md:col-start-5 md:col-span-8 bg-white shadow-md mt-10 ">
               <p className="text-center text-lg font-bold text-gray-500 ">
                 No results found
@@ -83,7 +69,7 @@ const SearchProduct = () => {
             </div>
           ) : (
             <div className="lg:col-start-4 lg:col-span-9 md:col-start-5 md:col-span-8  col-span-12">
-              <ListCourses products={productList} title={title} />
+              <ListCourses course={course} title={title} />
             </div>
           )}
         </div>
@@ -92,4 +78,4 @@ const SearchProduct = () => {
   );
 };
 
-export default SearchProduct;
+export default SearchCourse;

@@ -165,8 +165,8 @@ const summaryApi = {
     url: `${backendDomain}/user/`,
     method: "PUT",
   },
-  searchProduct: {
-    url: `${backendDomain}/product/search`,
+  searchCourse: {
+    url: `${backendDomain}/course/search`,
     method: "GET",
   },
 
@@ -194,8 +194,8 @@ const summaryApi = {
     url: `${backendDomain}/transaction`,
     method: "POST",
   },
-  getProductByCategory: {
-    url: `${backendDomain}/product/category/`,
+  getCourseByCategory: {
+    url: `${backendDomain}/course/category/`,
     method: "GET",
   },
   updateProfile: {

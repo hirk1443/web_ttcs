@@ -4,41 +4,34 @@ import ListProduct from "../components/homepage/ListCourses";
 import { useParams } from "react-router-dom";
 import Filter from "../components/homepage/Filter";
 import { LoadingOutlined } from "@ant-design/icons";
+import CategoryCard from "../components/layout/CategoryCard";
+import ListCourses from "../components/homepage/ListCourses";
+import ListCategory from "../components/homepage/ListCategory";
 
 const CategoryPage = () => {
-  const [products, setProducts] = useState([]);
+  const [course, setCourse] = useState([]);
   const { categoryName, categoryId } = useParams();
   const [loading, setLoading] = useState(false);
-  const [onClickFilter, setOnClickFilter] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const handleFilterProducts = (filtered) => {
-    setFilteredProducts(filtered);
-  };
-  const handleClickFilter = () => {
-    setOnClickFilter(true);
-  };
-  const productList = useMemo(() => {
-    return filteredProducts.length > 0 ? filteredProducts : products;
-  }, [products, filteredProducts]);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     const fetchCategory = async () => {
       try {
-        const categoryResponse = await fetch(
-          summaryApi.getProductByCategory.url + `${categoryId}`,
+        const courseResponse = await fetch(
+          summaryApi.getCourseByCategory.url + `${categoryId}`,
           {
-            method: summaryApi.getProductByCategory.method,
+            method: summaryApi.getCourseByCategory.method,
             headers: {
               "Content-Type": "application/json",
             },
           }
         );
 
-        const dataResult = await categoryResponse.json();
+        const dataResult = await courseResponse.json();
         if (dataResult.respCode === "000") {
-          setProducts(dataResult.data);
+          setCourse(dataResult.data);
         }
       } catch (error) {
         console.log("error", error);
@@ -50,35 +43,58 @@ const CategoryPage = () => {
     fetchCategory();
   }, [categoryId]);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setIsCategoriesLoading(true);
+        const categoriesResponse = await fetch(summaryApi.allCategory.url, {
+          method: summaryApi.allCategory.method,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        const categoriesResult = await categoriesResponse.json();
+
+        if (categoriesResult.respCode === "000") {
+          setCategories(categoriesResult.data);
+        }
+      } catch (error) {
+        console.log("error", error);
+      } finally {
+        setIsCategoriesLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
   return (
-    <div className="container  mx-auto ">
+    <div className="container ">
       {loading && (
         <div className="flex justify-center items-center h-screen">
           <LoadingOutlined style={{ fontSize: 48, color: "red" }} spin />
         </div>
       )}
 
-      <div className=" grid grid-cols-12 lg:gap-x-10 gap-x-3">
-        <div className="lg:col-span-3 md:col-span-4 col-span-12 mt-10 sm:min-h-screen ">
-          <div className="sticky top-28 ">
-            <Filter
-              onFilter={handleFilterProducts}
-              onClickFilter={handleClickFilter}
-              products={products}
-            />
+      <div className=" flex flex-col md:flex-row mt-5">
+        <div className="md:w-2/6 lg:w-1/5 w-full md:pr-4">
+          <div className="sticky top-24 ">
+            <ListCategory categories={categories} />
           </div>
         </div>
 
-        {(filteredProducts.length === 0 && onClickFilter) ||
-        productList.length === 0 ? (
-          <div className="lg:col-start-4 lg:col-span-9 md:col-start-5 md:col-span-8 bg-white shadow-md mt-10 ">
+        {course.length === 0 ? (
+          <div className="md:w-4/6 lg:w-4/5 w-full md:pl-4">
             <p className="text-center text-lg font-bold text-gray-500 ">
               No results found
             </p>
           </div>
         ) : (
           <div className="lg:col-start-4 lg:col-span-9 md:col-start-5 md:col-span-8  col-span-12">
-            <ListProduct products={productList} title={categoryName} />
+            <ListCourses
+              course={course}
+              title={`Kết quả của các môn với bộ môn ${categoryName}`}
+            />
           </div>
         )}
       </div>

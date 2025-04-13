@@ -15,13 +15,11 @@ import AdminHome from "../pages/AdminHome";
 import ProductsContent from "../components/adminpage/product/ProductsContent";
 import UsersContent from "../components/adminpage/user/UsersContent";
 import NotFound from "../pages/NotFound404";
-import SearchProduct from "../pages/SearchProduct";
-import OrderStatus from "../components/cart/OrderStatus";
+import SearchCourse from "../pages/SearchCourse";
 import CategoryPage from "../pages/CategoryPage";
 import OrdersContent from "../components/adminpage/order/OrdersContent";
 import ChatContent from "../components/adminpage/message/ChatContent";
 import Statistics from "../components/adminpage/statistic/Statistics";
-import OrderDetails from "../components/profile/OrderDetails";
 
 import BrandsContent from "../components/adminpage/brand/BrandsContent";
 import CategoryContent from "../components/adminpage/category/CategoryContent";
@@ -41,28 +39,8 @@ const router = createBrowserRouter([
         element: <Home />,
         children: [
           {
-            path: "cart",
-            element: (
-              <PrivateRoute>
-                <Cart />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "/product/:id",
-            element: <ProductDetail />,
-          },
-          {
-            path: "checkout",
-            element: (
-              <PrivateRoute>
-                <Checkout />
-              </PrivateRoute>
-            ),
-          },
-          {
             path: "/search",
-            element: <SearchProduct />,
+            element: <SearchCourse />,
           },
           {
             path: "profile",
@@ -72,14 +50,7 @@ const router = createBrowserRouter([
               </PrivateRoute>
             ),
           },
-          {
-            path: "/order-status",
-            element: (
-              <PrivateRoute>
-                <OrderStatus />
-              </PrivateRoute>
-            ),
-          },
+
           {
             path: "*",
             element: <NotFound />,
@@ -87,14 +58,6 @@ const router = createBrowserRouter([
           {
             path: "/:categoryName/:categoryId",
             element: <CategoryPage />,
-          },
-          {
-            path: "/order-detail",
-            element: (
-              <PrivateRoute>
-                <OrderDetails />
-              </PrivateRoute>
-            ),
           },
         ],
       },
