@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
 
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { PiUserCircle } from "react-icons/pi";
 
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../store/userSlice";
 import Cookies from "js-cookie";
 import { message } from "antd";
-import { Badge } from "antd";
 import { clearCart } from "../../store/cartSlice";
 import { clearFavorites } from "../../store/favoritesSlice ";
 import CartTab from "../cart/CartTab";

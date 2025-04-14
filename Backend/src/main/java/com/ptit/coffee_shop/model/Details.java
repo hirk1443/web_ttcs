@@ -36,4 +36,8 @@ public class Details {
     @OneToMany()
     @JoinColumn(name = "content_id")
     private List<Content> contents;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 }

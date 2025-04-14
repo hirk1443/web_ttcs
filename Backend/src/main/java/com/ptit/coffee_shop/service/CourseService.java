@@ -1,9 +1,12 @@
 package com.ptit.coffee_shop.service;
 
+import java.lang.classfile.ClassFile.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.Locale.Category;
+import java.util.stream.Collectors;
 
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +14,10 @@ import com.ptit.coffee_shop.common.Constant;
 import com.ptit.coffee_shop.config.MessageBuilder;
 import com.ptit.coffee_shop.exception.CoffeeShopException;
 import com.ptit.coffee_shop.model.Course;
+import com.ptit.coffee_shop.model.Details;
 import com.ptit.coffee_shop.payload.request.CourseRequest;
+import com.ptit.coffee_shop.payload.response.CourseDTO;
+import com.ptit.coffee_shop.payload.response.DetailsDTO;
 import com.ptit.coffee_shop.payload.response.RespMessage;
 import com.ptit.coffee_shop.repository.CategoryRepository;
 import com.ptit.coffee_shop.repository.CourseRepository;
@@ -30,7 +36,9 @@ public class CourseService {
 
     public RespMessage getAllCourses() {
         List<Course> courses = courseRepository.findAll();
-        return messageBuilder.buildSuccessMessage(courses);
+
+        List<CourseDTO> result = courses.stream().map(CourseDTO::new).collect(Collectors.toList());
+        return messageBuilder.buildSuccessMessage(result);
     }
 
     public RespMessage addCourse(CourseRequest courseRequest) {
@@ -67,5 +75,44 @@ public class CourseService {
                     "Error when add course");
         }
         return messageBuilder.buildSuccessMessage(new Object[] { "add course suceesfully" });
+    }
+
+    public RespMessage getCourseByCategoryId(Long categoryId) {
+        try {
+            List<Course> courses = courseRepository.findByCategoryId(categoryId);
+
+            List<CourseDTO> result = courses.stream()
+                    .map(CourseDTO::new)
+                    .collect(Collectors.toList());
+            return messageBuilder.buildSuccessMessage(result);
+        } catch (Exception e) {
+            return messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null, null);
+
+        }
+    }
+
+    public RespMessage getCourseByKeyword(String keyword) {
+        try {
+            List<Course> courses = courseRepository.findByKeyword(keyword);
+
+            List<CourseDTO> result = courses.stream()
+                    .map(CourseDTO::new)
+                    .collect(Collectors.toList());
+            return messageBuilder.buildSuccessMessage(result);
+        } catch (Exception e) {
+            return messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null, null);
+
+        }
+    }
+
+    public RespMessage getCourseById(Long id) {
+        try {
+            Optional<Course> course = courseRepository.findById(id);
+
+            CourseDTO result = new CourseDTO(course.get());
+            return messageBuilder.buildSuccessMessage(result);
+        } catch (Exception e) {
+            return messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null, null);
+        }
     }
 }

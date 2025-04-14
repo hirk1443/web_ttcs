@@ -45,18 +45,17 @@ const summaryApi = {
     url: `${backendDomain}/category`,
     method: "POST",
   },
-  allBrand: {
-    url: `${backendDomain}/brand/all`,
-    method: "GET",
-  },
-  addBrand: {
-    url: `${backendDomain}/brand`,
-    method: "POST",
-  },
+
   allCourse: {
     url: `${backendDomain}/course/all`,
     method: "GET",
   },
+
+  getCourseById: {
+    url: `${backendDomain}/course/courseId`,
+    method: "GET",
+  },
+
   addProduct: {
     url: `${backendDomain}/product`,
     method: "POST",
@@ -196,6 +195,11 @@ const summaryApi = {
   },
   getCourseByCategory: {
     url: `${backendDomain}/course/category/`,
+    method: "GET",
+  },
+
+  getDetailsByCourse: {
+    url: `${backendDomain}/details/by-course`,
     method: "GET",
   },
   updateProfile: {

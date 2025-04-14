@@ -35,7 +35,6 @@ public class Course {
     @Column(name = "teacher")
     private String teacher;
 
-    @OneToMany
-    @JoinColumn(name = "details_id")
+    @OneToMany(mappedBy = "course")
     private List<Details> details;
 }
