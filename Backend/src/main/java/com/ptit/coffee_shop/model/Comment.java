@@ -30,4 +30,8 @@ public class Comment {
     @Column(name = "updated_at")
     private Date updated_at;
 
+    @ManyToOne
+    @JoinColumn(name = "content_id", nullable = false)
+    private Content content;
+
 }

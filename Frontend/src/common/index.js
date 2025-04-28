@@ -1,6 +1,7 @@
 const backendDomain = "http://localhost:8080/api";
 
 const summaryApi = {
+  //common
   signUP: {
     url: `${backendDomain}/auth/register`,
     method: "POST",
@@ -37,6 +38,23 @@ const summaryApi = {
     url: `${backendDomain}/auth/refresh-token`,
     method: "POST",
   },
+
+  uploadImage: {
+    url: `${backendDomain}/image/upload`,
+    method: "POST",
+  },
+
+  uploadDocument: {
+    url: `${backendDomain}/document/upload`,
+    method: "POST",
+  },
+
+  getDetailsById: {
+    url: `${backendDomain}/details/by-id`,
+    method: "GET",
+  },
+
+  //course
   allCategory: {
     url: `${backendDomain}/category/all`,
     method: "GET",
@@ -56,106 +74,73 @@ const summaryApi = {
     method: "GET",
   },
 
-  addProduct: {
-    url: `${backendDomain}/product`,
+  addCourse: {
+    url: `${backendDomain}/course/add`,
     method: "POST",
   },
-  updateProduct: {
-    url: `${backendDomain}/product/`,
-    method: "PUT",
-  },
-  deleteProduct: {
-    url: `${backendDomain}/product/`,
-    method: "DELETE",
-  },
-  updateCartItem: {
-    url: `${backendDomain}/cart/item`,
-    method: "PUT",
-  },
-  getAllCartItems: {
-    url: `${backendDomain}/cart/user/`,
-    method: "GET",
-  },
-  addCartItem: {
-    url: `${backendDomain}/cart/item`,
-    method: "POST",
-  },
-  deleteCartItem: {
-    url: `${backendDomain}/cart/item/`,
-    method: "DELETE",
-  },
-  getAddressByUser: {
-    url: `${backendDomain}/address`,
-    method: "GET",
-  },
-  addShippingAddress: {
-    url: `${backendDomain}/address`,
-    method: "POST",
-  },
-  updateShippingAddress: {
-    url: `${backendDomain}/address`,
-    method: "PUT",
-  },
-  deleteShippingAddress: {
-    url: `${backendDomain}/address/`,
+  deleteCourse: {
+    url: `${backendDomain}/course/delete/`,
     method: "DELETE",
   },
 
-  productDetails: {
-    url: `${backendDomain}/product/`,
+  searchCourse: {
+    url: `${backendDomain}/course/search`,
     method: "GET",
   },
-  productItem: {
-    url: `${backendDomain}/product-item/`,
+
+  getCourseByCategory: {
+    url: `${backendDomain}/course/category/`,
     method: "GET",
   },
-  addProductItem: {
-    url: `${backendDomain}/product-item`,
-    method: "POST",
+
+  //Details
+  getDetailsByCourse: {
+    url: `${backendDomain}/details/by-course`,
+    method: "GET",
   },
-  updateProductItem: {
-    url: `${backendDomain}/product-item/`,
-    method: "PUT",
+
+  getAlLDetails: {
+    url: `${backendDomain}/details/all`,
+    method: "GET",
   },
-  deleteProductItem: {
-    url: `${backendDomain}/product-item/`,
+
+  deleteDetails: {
+    url: `${backendDomain}/details/delete`,
     method: "DELETE",
   },
 
-  createRefund: {
-    url: `${backendDomain}/payment`,
+  addDetails: {
+    url: `${backendDomain}/details/add`,
     method: "POST",
   },
 
-  createOnlinePayment: {
-    url: `${backendDomain}/payment`,
+  //content
+  getAllContent: {
+    url: `${backendDomain}/content/all`,
     method: "GET",
   },
 
-  addOrder: {
-    url: `${backendDomain}/order`,
+  addContent: {
+    url: `${backendDomain}/content/add`,
     method: "POST",
   },
-  addReview: {
-    url: `${backendDomain}/review`,
-    method: "POST",
-  },
-  deleteReview: {
-    url: `${backendDomain}/review/`,
+
+  deleteContent: {
+    url: `${backendDomain}/content/delete`,
     method: "DELETE",
   },
-  getUserOrders: {
-    url: `${backendDomain}/order/user/all`,
+
+  getContentByDetailsId: {
+    url: `${backendDomain}/content/by-details`,
     method: "GET",
   },
-  getProfile: {
-    url: `${backendDomain}/profile`,
+
+  getContentById: {
+    url: `${backendDomain}/content`,
     method: "GET",
   },
-  uploadAvatarProfile: {
-    url: `${backendDomain}/profile/avatar`,
-    method: "POST",
-  },
+
+  //user
   getAllUsers: {
     url: `${backendDomain}/user/all`,
     method: "GET",
@@ -164,119 +149,15 @@ const summaryApi = {
     url: `${backendDomain}/user/`,
     method: "PUT",
   },
-  searchCourse: {
-    url: `${backendDomain}/course/search`,
-    method: "GET",
-  },
 
-  addFavorite: {
-    url: `${backendDomain}/favorites`,
-    method: "POST",
-  },
-  allFavorites: {
-    url: `${backendDomain}/favorites/`,
-    method: "GET",
-  },
-  deleteFavorites: {
-    url: `${backendDomain}/favorites`,
-    method: "DELETE",
-  },
-  addType: {
-    url: `${backendDomain}/type-product`,
-    method: "POST",
-  },
-  getAllType: {
-    url: `${backendDomain}/type-product/all`,
-    method: "GET",
-  },
-  addTransaction: {
-    url: `${backendDomain}/transaction`,
-    method: "POST",
-  },
-  getCourseByCategory: {
-    url: `${backendDomain}/course/category/`,
-    method: "GET",
-  },
-
-  getDetailsByCourse: {
-    url: `${backendDomain}/details/by-course`,
-    method: "GET",
-  },
   updateProfile: {
     url: `${backendDomain}/profile`,
     method: "PUT",
   },
-  getReviewByProductId: {
-    url: `${backendDomain}/review/product/`,
-    method: "GET",
-  },
-  uploadProductImage: {
-    url: `${backendDomain}/product/`,
-    method: "POST",
-  },
-  deleteProductImage: {
-    url: `${backendDomain}/product/image/`,
-    method: "DELETE",
-  },
-  getAllOrder: {
-    url: `${backendDomain}/order/get-all`,
-    method: "GET",
-  },
-  getOrderByStatus: {
-    url: `${backendDomain}/order/status/`,
-    method: "GET",
-  },
-  updateOrderStatus: {
-    url: `${backendDomain}/order/`,
-    method: "PUT",
-  },
-  getTop5MonthlySellingProduct: {
-    url: `${backendDomain}/statistic/product/monthly`,
-    method: "GET",
-  },
-  getTop5BestSellingProduct: {
-    url: `${backendDomain}/statistic/product`,
-    method: "GET",
-  },
-  getTop5MonthlyUsers: {
-    url: `${backendDomain}/statistic/user/monthly`,
-    method: "GET",
-  },
+
   getUsersStatistic: {
     url: `${backendDomain}/statistic/user`,
     method: "GET",
-  },
-  getAllBrand: {
-    url: `${backendDomain}/brand/all`,
-    method: "GET",
-  },
-  deleteBrand: {
-    url: `${backendDomain}/brand`,
-    method: "DELETE",
-  },
-  updateBrand: {
-    url: `${backendDomain}/brand`,
-    method: "PUT",
-  },
-  updateCategory: {
-    url: `${backendDomain}/category`,
-    method: "PUT",
-  },
-  deleteCategory: {
-    url: `${backendDomain}/category`,
-    method: "DELETE",
-  },
-  getOrderDetails: {
-    url: `${backendDomain}/order`,
-    method: "GET",
-  },
-  cancelOrder: {
-    url: `${backendDomain}/order/cancel-order/`,
-    method: "PUT",
-  },
-  cancelOrderAndRefund: {
-    url: `${backendDomain}/payment`,
-    method: "POST",
   },
 };
 

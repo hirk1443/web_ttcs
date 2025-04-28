@@ -1,6 +1,6 @@
 package com.ptit.coffee_shop.service;
 
-import java.lang.classfile.ClassFile.Option;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Locale.Category;
@@ -68,6 +68,8 @@ public class CourseService {
         course.setCategory(categoryOptional.get());
         course.setImageURL(courseRequest.getImageURL());
         course.setTeacher(courseRequest.getTeacher());
+        course.setCreated_at(new Date());
+        course.setUpdated_at(new Date());
         try {
             courseRepository.save(course);
         } catch (Exception e) {
@@ -113,6 +115,22 @@ public class CourseService {
             return messageBuilder.buildSuccessMessage(result);
         } catch (Exception e) {
             return messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null, null);
+        }
+    }
+
+    public RespMessage deleteCourse(Long id) {
+        Optional<Course> courseOptional = courseRepository.findById(id);
+        if (courseOptional.isEmpty()) {
+            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "course" }, "Course not found");
+        } else {
+            Course course = courseOptional.get();
+            try {
+                courseRepository.delete(course);
+                return messageBuilder.buildSuccessMessage(new Object[] { "deleted" });
+            } catch (Exception e) {
+                return messageBuilder.buildFailureMessage(Constant.SYSTEM_ERROR, null, null);
+
+            }
         }
     }
 }

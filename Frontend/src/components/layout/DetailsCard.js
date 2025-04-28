@@ -7,16 +7,19 @@ const DetailsCard = ({ details }) => {
   const navigate = useNavigate();
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
-  //   const handleCardClick = () => {
-  //     navigate(`/details/${details.id}`);
-  //   };
+  const handleCardClick = () => {
+    navigate(`/details/${details.id}`);
+  };
 
   const handleImageLoad = () => {
     setIsImageLoaded(true);
   };
 
   return (
-    <div className="max-h-50 bg-white rounded border p-4 overflow-hidden shadow-lg flex flex-col md:flex-row gap-4">
+    <div
+      className="max-h-50 bg-white rounded border p-4 overflow-hidden shadow-lg flex flex-col md:flex-row gap-4"
+      onClick={handleCardClick}
+    >
       {/* LEFT: Image */}
       <div className="md:w-1/5 h-32">
         {details?.imageURL ? (

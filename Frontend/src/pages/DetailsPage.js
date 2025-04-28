@@ -7,6 +7,7 @@ import ListCategory from "../components/homepage/ListCategory";
 import CourseCard from "../components/layout/CourseCard";
 import DetailsCard from "../components/layout/DetailsCard";
 import ListDetails from "../components/homepage/ListDetails";
+import Slideshow from "../components/homepage/Slideshow";
 
 const DetailsPage = () => {
   const [details, setDetails] = useState([]);
@@ -72,6 +73,7 @@ const DetailsPage = () => {
 
   return (
     <div className="container ">
+      <Slideshow className="rounded-xl shadow-lg overflow-hidden mb-6" />
       {loading && (
         <div className="flex justify-center items-center h-screen">
           <LoadingOutlined style={{ fontSize: 48, color: "red" }} spin />

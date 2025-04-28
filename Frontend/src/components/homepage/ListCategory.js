@@ -2,13 +2,20 @@ import CategoryCard from "../layout/CategoryCard";
 const ListCategory = ({ categories }) => {
   return (
     <>
-      <div className="container mx-auto mt-10 bg-white p-2  md:p-4  shadow-md md:rounded-md">
+      <div className="container mx-auto mt-10 bg-white p-4 shadow-md rounded-md">
         <div>
-          <h2 className="font-bold text-base ">Danh mục:</h2>
+          <h2 className="font-bold text-xl text-gray-800 border-b pb-2 mb-4">
+            📚 Danh mục khóa học
+          </h2>
         </div>
-        <div className="mt-4 grid md:grid-cols-1 grid-cols-2 gap-1 lg:gap-2   ">
+        <div className="mt-4 grid md:grid-cols-1 grid-cols-2 gap-3">
           {categories.map((category, index) => (
-            <CategoryCard key={index} category={category} />
+            <div
+              key={index}
+              className="hover:bg-gray-100 transition-all rounded-md p-2 cursor-pointer"
+            >
+              <CategoryCard category={category} />
+            </div>
           ))}
         </div>
       </div>

@@ -23,6 +23,7 @@ public class Content {
     @Column(name = "title")
     private String title;
 
+    @Lob
     @Column(name = "document_link")
     private String documentLink;
 
@@ -35,8 +36,11 @@ public class Content {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @OneToMany
-    @JoinColumn(name = "comment_id")
+    @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
+
+    @ManyToOne
+    @JoinColumn(name = "details_id", nullable = false)
+    private Details details;
 
 }

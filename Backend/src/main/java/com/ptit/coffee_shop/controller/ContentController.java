@@ -1,33 +1,47 @@
 package com.ptit.coffee_shop.controller;
 
-import com.ptit.coffee_shop.common.Constant;
-import com.ptit.coffee_shop.common.GsonUtil;
-import com.ptit.coffee_shop.config.MessageBuilder;
-import com.ptit.coffee_shop.exception.CoffeeShopException;
-import com.ptit.coffee_shop.payload.request.CourseRequest;
-import com.ptit.coffee_shop.payload.response.RespMessage;
-import com.ptit.coffee_shop.service.CourseService;
+import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ptit.coffee_shop.common.Constant;
+import com.ptit.coffee_shop.common.GsonUtil;
+import com.ptit.coffee_shop.config.MessageBuilder;
+import com.ptit.coffee_shop.exception.CoffeeShopException;
+import com.ptit.coffee_shop.model.Content;
+import com.ptit.coffee_shop.model.Course;
+import com.ptit.coffee_shop.payload.request.ContentRequest;
+import com.ptit.coffee_shop.payload.request.CourseRequest;
+import com.ptit.coffee_shop.payload.response.RespMessage;
+import com.ptit.coffee_shop.service.ContentService;
 
 @RestController
-@RequestMapping("api/course")
-public class CourseController {
+@RequestMapping("/api/content")
+public class ContentController {
 
     @Autowired
-    private CourseService courseService;
+    private ContentService contentService;
 
     @Autowired
     private MessageBuilder messageBuilder;
 
     @GetMapping("/all")
-    public ResponseEntity<String> getAllCourses() {
+    @PreAuthorize("hasRole('ADMIN')")
+
+    public ResponseEntity<String> getAllContent() {
         try {
-            RespMessage respMessage = courseService.getAllCourses();
+            RespMessage respMessage = contentService.getAllContent();
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
                     HttpStatus.OK);
         } catch (CoffeeShopException e) {
@@ -46,9 +60,9 @@ public class CourseController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> addCourse(@RequestBody CourseRequest request) {
+    public ResponseEntity<String> addContent(@RequestBody ContentRequest request) {
         try {
-            RespMessage respMessage = courseService.addCourse(request);
+            RespMessage respMessage = contentService.addContent(request);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
         } catch (CoffeeShopException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
@@ -61,9 +75,9 @@ public class CourseController {
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> deleteCourse(@PathVariable long id) {
+    public ResponseEntity<String> deleteContent(@PathVariable long id) {
         try {
-            RespMessage respMessage = courseService.deleteCourse(id);
+            RespMessage respMessage = contentService.deleteContent(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
         } catch (CoffeeShopException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
@@ -74,10 +88,10 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/category/{id}")
-    public ResponseEntity<String> getCourseByCategoryId(@PathVariable Long id) {
+    @GetMapping("/by-details/{id}")
+    public ResponseEntity<String> getContentByDetailsId(@PathVariable long id) {
         try {
-            RespMessage respMessage = courseService.getCourseByCategoryId(id);
+            RespMessage respMessage = contentService.getContentByDetailsId(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
         } catch (CoffeeShopException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
@@ -88,10 +102,10 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<String> getCourseByKeyword(@RequestParam("q") String keyword) {
+    @GetMapping("/$id")
+    public ResponseEntity<String> getContentById(@PathVariable long id) {
         try {
-            RespMessage respMessage = courseService.getCourseByKeyword(keyword);
+            RespMessage respMessage = contentService.getContentById(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
         } catch (CoffeeShopException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
@@ -102,17 +116,4 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/courseId/{id}")
-    public ResponseEntity<String> getCourseByCourseId(@PathVariable Long id) {
-        try {
-            RespMessage respMessage = courseService.getCourseById(id);
-            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
-            RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
-            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            RespMessage respMessage = messageBuilder.buildFailureMessage(Constant.UNDEFINED, null, e.getMessage());
-            return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

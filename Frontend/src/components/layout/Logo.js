@@ -10,7 +10,7 @@ const Logo = () => {
       ></img>
 
       <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
-        Course Sharing
+        TLKHMPKV
       </h1>
     </div>
   );

@@ -23,7 +23,6 @@ const Header = () => {
 
   const loading = useSelector((state) => state.user.loading);
   const [totalQuantity, setTotalQuantity] = useState(0);
-
   const [showCartTab, setShowCartTab] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -37,7 +36,7 @@ const Header = () => {
     dispatch(clearFavorites());
     dispatch(clearAddress());
     navigate("/");
-    message.success("Logout Successfully!");
+    message.success("Đăng xuất thành công!");
   };
 
   const handleChange = (event) => {
@@ -67,102 +66,78 @@ const Header = () => {
 
   if (loading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
+      <div className="flex justify-center items-center h-screen">
         <div className="spinner"></div>
       </div>
     );
   }
 
   return (
-    <header className="bg-gray-150 dark:bg-gray-900 px-10 py-5 fixed top-0 w-full z-20">
+    <header className="bg-white dark:bg-gray-900 px-6 py-6 shadow-md fixed top-0 w-full z-50 border-b">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-32">
-          {/* logo  */}
-          <div className="">
-            <Link to="/">
-              <Logo />
-            </Link>
-          </div>
-        </div>
-        {/* search */}
-        <div className="bg-white hidden w-full max-w-xs lg:flex items-center justify-between rounded-full border pl-2 focus-within:shadow">
-          <input
-            type="text"
-            placeholder="Tìm kiếm gì đó đi"
-            className="w-full outline-none px-4 font-medium "
-            value={searchTerm}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-          />
-          <div
-            onClick={handleSearch}
-            className="flex h-8 min-w-[50px] items-center justify-center rounded-r-full cursor-pointer 
-            text-white text-lg  bg-gradient-to-r from-teal-500 via-teal-400 to-teal-500 transition-all 
-            duration-500 ease-in-out bg-[length:200%_auto] hover:bg-[position:right_center]"
-          >
-            <GrSearch />
+        {/* Logo */}
+        <Link to="/">
+          <Logo />
+        </Link>
+
+        {/* Search Bar */}
+        <div className="hidden lg:flex items-center w-full max-w-md ml-10">
+          <div className="flex w-full rounded-full border border-gray-300 overflow-hidden focus-within:shadow-md">
+            <input
+              type="text"
+              placeholder="Tìm kiếm khóa học..."
+              className="w-full px-4 py-2 outline-none text-gray-700"
+              value={searchTerm}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
+            <button
+              onClick={handleSearch}
+              className="flex items-center justify-center px-4 bg-gradient-to-r from-teal-500 to-teal-400 text-white hover:brightness-110 transition"
+            >
+              <GrSearch size={20} />
+            </button>
           </div>
         </div>
 
-        {/* user */}
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-6 relative">
-            {showCartTab && (
-              <div className="absolute top-12 -right-4 z-50 hidden md:block">
-                <CartTab items={carts} />
-              </div>
-            )}
-          </div>
+        {/* User + Cart */}
+        <div className="flex items-center space-x-4">
+          {/* Cart tab placeholder */}
+          {showCartTab && (
+            <div className="absolute top-12 -right-4 z-50 hidden md:block">
+              <CartTab items={carts} />
+            </div>
+          )}
 
-          {user?.id && (
+          {/* User avatar or login */}
+          {user?.id ? (
             <>
               <Link to="/profile">
-                <div className="relative flex cursor-pointer justify-center text-4xl">
+                <div className="relative flex items-center justify-center text-3xl text-gray-600 hover:text-teal-500 transition">
                   {user?.profile_img ? (
                     <img
-                      src={user?.profile_img}
+                      src={user.profile_img}
                       alt="Avatar User"
-                      className="w-10 h-10 object-cover rounded-full"
+                      className="w-10 h-10 object-cover rounded-full border"
                     />
                   ) : (
                     <PiUserCircle />
                   )}
                 </div>
               </Link>
-            </>
-          )}
-          {!user?.id ? (
-            <>
-              <div>
-                <Link to="/login">
-                  <button
-                    className="rounded-full px-5 py-1 text-white text-lg shadow-lg
-                  bg-gradient-to-r from-teal-500 via-teal-400 to-teal-500 transition-all duration-500 
-                  ease-in-out bg-[length:200%_auto] hover:bg-[position:right_center]"
-                  >
-                    Sign In
-                  </button>
-                </Link>
-              </div>
-            </>
-          ) : (
-            <div>
               <button
                 onClick={handleLogout}
-                className="rounded-full  px-5 py-1 text-white text-lg shadow-lg bg-gradient-to-r
-                 from-teal-500 via-teal-400 to-teal-500 transition-all duration-500 ease-in-out bg-[length:200%_auto]
-                  hover:bg-[position:right_center]"
+                className="px-5 py-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-teal-500 to-teal-400 hover:brightness-110 transition"
               >
-                Logout
+                Đăng xuất
               </button>
-            </div>
+            </>
+          ) : (
+            <Link to="/login">
+              <button className="px-5 py-2 text-sm font-medium text-white rounded-full bg-gradient-to-r from-teal-500 to-teal-400 hover:brightness-110 transition">
+                Đăng nhập
+              </button>
+            </Link>
           )}
         </div>
       </div>

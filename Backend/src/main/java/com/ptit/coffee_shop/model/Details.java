@@ -24,6 +24,7 @@ public class Details {
     @Column(name = "image")
     private String imageURL;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
@@ -33,11 +34,10 @@ public class Details {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @OneToMany()
-    @JoinColumn(name = "content_id")
+    @OneToMany(mappedBy = "details", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Content> contents;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
+    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 }

@@ -17,10 +17,10 @@ import SearchCourse from "../pages/SearchCourse";
 import CategoryPage from "../pages/CategoryPage";
 import CourseContent from "../components/adminpage/course/CourseContent";
 
-import Statistics from "../components/adminpage/statistic/Statistics";
-
 import DetailsPage from "../pages/DetailsPage";
-import CourseForm from "../components/adminpage/course/CouresForm";
+import ContentPage from "../pages/ContentPage";
+
+import Player from "../pages/Player";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +60,16 @@ const router = createBrowserRouter([
           {
             path: "/course/:courseId",
             element: <DetailsPage />,
+          },
+          {
+            path: "/details/:detailsId",
+            element: <ContentPage />,
+            children: [
+              {
+                path: "player/:contentId",
+                element: <Player />,
+              },
+            ],
           },
         ],
       },
@@ -103,10 +113,6 @@ const router = createBrowserRouter([
           {
             path: "course",
             element: <CourseContent />,
-          },
-          {
-            path: "addCourse",
-            element: <CourseForm />,
           },
 
           {

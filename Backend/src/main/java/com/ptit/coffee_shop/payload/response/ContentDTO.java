@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.ptit.coffee_shop.model.Category;
+import com.ptit.coffee_shop.model.Content;
 import com.ptit.coffee_shop.model.Course;
 import com.ptit.coffee_shop.model.Details;
 
@@ -14,22 +15,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseDTO {
+public class ContentDTO {
     private Long id;
     private String name;
-    private String teacher;
-    private String imageURL;
-    private Category category;
+    private String documentLink;
+    private String videoLink;
     private Date createdAt;
     private Date updatedAt;
+    private DetailsDTO details;
 
-    public CourseDTO(Course c) {
+    public ContentDTO(Content c) {
         this.id = c.getId();
-        this.name = c.getName();
-        this.imageURL = c.getImageURL();
-        this.teacher = c.getTeacher();
-        this.category = c.getCategory();
+        this.name = c.getTitle();
         this.createdAt = c.getCreated_at();
         this.updatedAt = c.getUpdated_at();
+        this.details = new DetailsDTO(c.getDetails());
+        this.documentLink = c.getDocumentLink();
+        this.videoLink = c.getVideoLink();
     }
 }

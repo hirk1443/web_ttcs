@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import com.ptit.coffee_shop.common.Constant;
@@ -78,4 +79,40 @@ public class DetailsService {
         return messageBuilder.buildSuccessMessage(result);
     }
 
+    public RespMessage getAllDetails() {
+        List<Details> details = detailsRepository.findAll();
+
+        List<DetailsDTO> result = details.stream().map(DetailsDTO::new).collect(Collectors.toList());
+
+        return messageBuilder.buildSuccessMessage(result);
+    }
+
+    public RespMessage getDetailsById(Long id) {
+        Optional<Details> details = detailsRepository.findById(id);
+        if (details.isEmpty()) {
+            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                    "Details not found");
+        }
+        DetailsDTO detailsDTO = new DetailsDTO(details.get());
+        return messageBuilder.buildSuccessMessage(detailsDTO);
+    }
+
+    public RespMessage deleteDetails(Long id) {
+        try {
+            Optional<Details> detailsOption = detailsRepository.findById(id);
+            if (detailsOption.isEmpty()) {
+                throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                        "Details not found");
+
+            } else {
+                Details details = detailsOption.get();
+                detailsRepository.delete(details);
+                return messageBuilder.buildSuccessMessage(new Object[] { "details deleted" });
+            }
+        } catch (Exception e) {
+
+            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+                    "Error when delete details");
+        }
+    }
 }

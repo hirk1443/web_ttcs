@@ -1,6 +1,7 @@
 
 package com.ptit.coffee_shop.model;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.mapping.Join;
@@ -35,6 +36,15 @@ public class Course {
     @Column(name = "teacher")
     private String teacher;
 
-    @OneToMany(mappedBy = "course")
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "created_at")
+    private Date created_at;
+
+    @Column(name = "updated_at")
+    private Date updated_at;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Details> details;
 }
