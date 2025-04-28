@@ -45,7 +45,7 @@ const summaryApi = {
   },
 
   uploadDocument: {
-    url: `${backendDomain}/document/upload`,
+    url: `${backendDomain}/file/upload`,
     method: "POST",
   },
 
@@ -158,6 +158,35 @@ const summaryApi = {
   getUsersStatistic: {
     url: `${backendDomain}/statistic/user`,
     method: "GET",
+  },
+
+  //document
+
+  getAllDocument: {
+    url: `${backendDomain}/document/all`,
+    method: "GET",
+  },
+  getDocumentByUserId: {
+    url: `${backendDomain}/document/by-id`,
+    method: "GET",
+  },
+  getDocumentByStatus: {
+    url: `${backendDomain}/document/all/status`,
+    method: "GET",
+  },
+
+  addDocument: {
+    url: `${backendDomain}/document/add`,
+    method: "POST",
+  },
+  changeDocumentStatus: {
+    url: `${backendDomain}/document/change`,
+    method: "PUT",
+  },
+
+  deleteDocument: {
+    url: `${backendDomain}/document/delete`,
+    method: "DELETE",
   },
 };
 

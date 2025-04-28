@@ -1,7 +1,8 @@
 package com.ptit.coffee_shop.model;
 
 import java.util.Date;
-import java.util.List;
+
+import com.ptit.coffee_shop.common.enums.DocumentStatusEnum;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,13 +31,17 @@ public class Document {
     @Column(name = "name")
     private String name;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
     @Column(name = "created_at")
     private Date created_at;
 
-    @OneToMany()
-    @JoinColumn(name = "content_id")
-    private List<Content> contents;
+    @Column(name = "documentLink")
+    private String documentLink;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private DocumentStatusEnum status;
 }

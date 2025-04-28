@@ -21,6 +21,8 @@ import DetailsPage from "../pages/DetailsPage";
 import ContentPage from "../pages/ContentPage";
 
 import Player from "../pages/Player";
+import DocumentPage from "../pages/DocumentPage";
+import DocumentContent from "../components/adminpage/document/DocumentContent";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +73,10 @@ const router = createBrowserRouter([
               },
             ],
           },
+          {
+            path: "/document",
+            element: <DocumentPage />,
+          },
         ],
       },
       {
@@ -113,6 +119,10 @@ const router = createBrowserRouter([
           {
             path: "course",
             element: <CourseContent />,
+          },
+          {
+            path: "document",
+            element: <DocumentContent />,
           },
 
           {

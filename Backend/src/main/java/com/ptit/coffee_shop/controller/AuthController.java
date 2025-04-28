@@ -11,13 +11,12 @@ import com.ptit.coffee_shop.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/auth")
-@RequiredArgsConstructor 
+@RequiredArgsConstructor
 public class AuthController {
     public final AuthService authService;
     public final MessageBuilder messageBuilder;
@@ -41,11 +40,10 @@ public class AuthController {
         try {
             RespMessage response = authService.register(registerRequest);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.OK);
-        } catch (CoffeeShopException e){
+        } catch (CoffeeShopException e) {
             RespMessage response = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.BAD_REQUEST);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             RespMessage response = messageBuilder.buildFailureMessage(Constant.UNDEFINED, null, e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -64,24 +62,31 @@ public class AuthController {
 
     // @RequestMapping(value = "/password", method = RequestMethod.POST)
     // @PreAuthorize("hasRole('ROLE_USER')")
-    // public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) {
-    //     try {
-    //         RespMessage response = authService.changePassword(changePasswordDTO);
-    //         return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.OK);
-    //     } catch (CoffeeShopException e) {
-    //         RespMessage response = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
-    //         return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.BAD_REQUEST);
-    //     }
-    //     catch (Exception e) {
-    //         RespMessage response = messageBuilder.buildFailureMessage(Constant.UNDEFINED, null, e.getMessage());
-    //         return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
+    // public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO
+    // changePasswordDTO) {
+    // try {
+    // RespMessage response = authService.changePassword(changePasswordDTO);
+    // return new ResponseEntity<>(GsonUtil.getInstance().toJson(response),
+    // HttpStatus.OK);
+    // } catch (CoffeeShopException e) {
+    // RespMessage response = messageBuilder.buildFailureMessage(e.getCode(),
+    // e.getObjects(), e.getMessage());
+    // return new ResponseEntity<>(GsonUtil.getInstance().toJson(response),
+    // HttpStatus.BAD_REQUEST);
+    // }
+    // catch (Exception e) {
+    // RespMessage response = messageBuilder.buildFailureMessage(Constant.UNDEFINED,
+    // null, e.getMessage());
+    // return new ResponseEntity<>(GsonUtil.getInstance().toJson(response),
+    // HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
     // }
 
     // @PostMapping("/refresh-token")
-    // public ResponseEntity<RespMessage> refreshAccessToken(@RequestHeader("Authorization") String refreshToken) {
-    //     RespMessage response = authService.refreshAccessToken(refreshToken);
-    //     return new ResponseEntity<>(response, HttpStatus.OK);
+    // public ResponseEntity<RespMessage>
+    // refreshAccessToken(@RequestHeader("Authorization") String refreshToken) {
+    // RespMessage response = authService.refreshAccessToken(refreshToken);
+    // return new ResponseEntity<>(response, HttpStatus.OK);
     // }
 
 }

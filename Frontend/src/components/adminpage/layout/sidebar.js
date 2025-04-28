@@ -47,17 +47,17 @@ const Sidebar = () => {
               Thông tin khóa học
             </NavLink>
 
-            {/* <NavLink
-              to=""
+            <NavLink
+              to="document"
               className={({ isActive }) =>
                 isActive
                   ? "flex items-center p-2 mb-1 rounded-lg bg-indigo-100 transition-all duration-300 ease-in-out transform scale-105"
                   : "flex items-center p-2 mb-1 rounded-lg hover:bg-indigo-100 cursor-pointer transition-all duration-300 ease-in-out"
               }
             >
-              <MdBarChart className="mr-2 text-lg" />
-              Thống kê truy cập
-            </NavLink> */}
+              <LiaClipboardListSolid className="mr-2 text-lg" />
+              Thông tin tài liệu
+            </NavLink>
           </ul>
         </div>
 

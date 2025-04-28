@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <div className="flex items-center space-x-2">
       <img
-        src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/480444026_122093622872782670_4295889166694306543_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeH4lsy-KBdgr8OXx0q1Jim27qEF41ppvVHuoQXjWmm9Uc6VbIR_qHhkOSXdpnlGn2x4cdIz04OVXekDzIMcspTX&_nc_ohc=LIqU1NxOF9EQ7kNvwG3xN7U&_nc_oc=AdloDiux1VF5yXCSY1cgPyde8FaEDI5s2iBQGDHl05AKiaWLWz8bWtNBbd1hpBnnXaKYqz3YBYkYzEMJsnL5RoHj&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=m8GpUnlvp5s5zEG5nOst9w&oh=00_AfHoE9rDTQWiNftxBE05D3GNrbKFcFqAQjO-j1qfxxQEJg&oe=68014546"
+        src="https://scontent-hkg1-1.xx.fbcdn.net/v/t39.30808-6/480444026_122093622872782670_4295889166694306543_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=W38bkqX8fbUQ7kNvwHp6g-S&_nc_oc=AdlKcY-hBD3ynDP-7GMjqQ3vKN9t5zYlU7DCITThHCqJSzEJd6UegkJjbpKXwmldEEO7YhngMpfbtWtm2xRgFDt4&_nc_zt=23&_nc_ht=scontent-hkg1-1.xx&_nc_gid=kjvs4qY6nrqL1epR5ON9Tw&oh=00_AfGJ230FKcIAiyKmUUpk1ICC-whZPI7ykCkFIdqfNINA3Q&oe=68157C46"
         width={50}
         height={50}
       ></img>

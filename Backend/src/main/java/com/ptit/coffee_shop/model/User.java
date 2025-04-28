@@ -1,7 +1,5 @@
 package com.ptit.coffee_shop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ptit.coffee_shop.common.enums.Status;
 import com.ptit.coffee_shop.payload.response.UserStatisticResponse;
 import jakarta.persistence.*;
@@ -15,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -58,6 +57,9 @@ public class User implements UserDetails {
 
     @OneToOne(mappedBy = "user")
     private ForgotPassword forgotPassword;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Document> documents;
 
     @PrePersist
     public void prePersist() {

@@ -19,14 +19,11 @@ import {
   message,
   Divider,
 } from "antd";
-import Highlighter from "react-highlight-words";
 import fetchWithAuth from "../../../helps/fetchWithAuth";
 import summaryApi from "../../../common";
 
 const { Option } = Select;
 const ContentTable = ({ courseList, contentList, fetchAllContents }) => {
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
   const [form] = Form.useForm();
 
   const searchInput = useRef(null);
@@ -131,8 +128,6 @@ const ContentTable = ({ courseList, contentList, fetchAllContents }) => {
   };
 
   const handleAddContent = async (values) => {
-    console.log("Submitted Values:", values);
-
     try {
       const results = await Promise.all(
         values.contents.map(async (content) => {

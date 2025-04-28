@@ -4,10 +4,6 @@ package com.ptit.coffee_shop.model;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.mapping.Join;
-
-import com.ptit.coffee_shop.common.enums.CategoryEnum;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

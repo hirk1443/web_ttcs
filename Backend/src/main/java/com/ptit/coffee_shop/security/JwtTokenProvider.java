@@ -1,19 +1,19 @@
 package com.ptit.coffee_shop.security;
 
 import com.ptit.coffee_shop.common.Constant;
-import com.ptit.coffee_shop.common.enums.RoleEnum;
+
 import com.ptit.coffee_shop.exception.CoffeeShopException;
-import com.ptit.coffee_shop.exception.JwtAPIException;
+
 import com.ptit.coffee_shop.model.User;
 import com.ptit.coffee_shop.payload.response.LoginResponse;
-import com.ptit.coffee_shop.payload.response.UserDTO;
+
 import com.ptit.coffee_shop.service.UserService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +39,7 @@ public class JwtTokenProvider {
         String username = authentication.getName();
         Optional<User> user = userService.getUserByEmail(username);
         if (user.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] {"User email"} , "User not found");
+            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "User email" }, "User not found");
         }
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
@@ -68,8 +68,7 @@ public class JwtTokenProvider {
 
     private Key key() {
         return Keys.hmacShaKeyFor(
-                Decoders.BASE64.decode(jwtSecret)
-        );
+                Decoders.BASE64.decode(jwtSecret));
     }
 
     public String getUsername(String token) {
@@ -89,18 +88,18 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED,null, "Invalid JWT token");
+            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "Invalid JWT token");
         } catch (ExpiredJwtException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED,null, "Expired JWT token");
+            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "Expired JWT token");
         } catch (UnsupportedJwtException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED,null, "Unsupported JWT token");
+            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
             throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "JWT claims string is empty.");
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "JWT token is invalid: " + ex.getMessage());
         }
     }
+
     public String generateAccessToken(String username) {
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
@@ -112,12 +111,12 @@ public class JwtTokenProvider {
                 .signWith(key())
                 .compact();
     }
+
     public String generateRefreshToken(String username) {
         Date currentDate = new Date();
         Date refreshExpireDate = new Date(currentDate.getTime() + jwtRefreshExpirationDate);
 
-
-        return  Jwts.builder()
+        return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(currentDate)
                 .setExpiration(refreshExpireDate)

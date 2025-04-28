@@ -5,7 +5,6 @@ import com.cloudinary.utils.ObjectUtils;
 import com.ptit.coffee_shop.config.MessageBuilder;
 import com.ptit.coffee_shop.payload.response.RespMessage;
 
-import jakarta.mail.Message;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;

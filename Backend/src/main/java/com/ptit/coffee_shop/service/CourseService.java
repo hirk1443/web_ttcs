@@ -3,10 +3,9 @@ package com.ptit.coffee_shop.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.Locale.Category;
+
 import java.util.stream.Collectors;
 
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +13,10 @@ import com.ptit.coffee_shop.common.Constant;
 import com.ptit.coffee_shop.config.MessageBuilder;
 import com.ptit.coffee_shop.exception.CoffeeShopException;
 import com.ptit.coffee_shop.model.Course;
-import com.ptit.coffee_shop.model.Details;
+
 import com.ptit.coffee_shop.payload.request.CourseRequest;
 import com.ptit.coffee_shop.payload.response.CourseDTO;
-import com.ptit.coffee_shop.payload.response.DetailsDTO;
+
 import com.ptit.coffee_shop.payload.response.RespMessage;
 import com.ptit.coffee_shop.repository.CategoryRepository;
 import com.ptit.coffee_shop.repository.CourseRepository;

@@ -50,20 +50,25 @@ public class AuthService {
 
     private void checkLoginRequest(LoginRequest loginRequest) {
         if (loginRequest.getEmail() == null || loginRequest.getEmail().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"LoginRequest.Email"}, "Email must be not null");
+            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "LoginRequest.Email" },
+                    "Email must be not null");
         }
         if (loginRequest.getPassword() == null || loginRequest.getPassword().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"LoginRequest.Password"}, "Password must be not null");
+            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "LoginRequest.Password" },
+                    "Password must be not null");
         }
         Optional<User> userOptional = userRepository.findByEmail(loginRequest.getEmail());
         if (userOptional.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"LoginRequest.Email"}, "Email not found");
+            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[] { "LoginRequest.Email" },
+                    "Email not found");
         }
         if (!passwordEncoder.matches(loginRequest.getPassword(), userOptional.get().getPassword())) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"LoginRequest.Password"}, "Password not correct");
+            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[] { "LoginRequest.Password" },
+                    "Password not correct");
         }
         if (!userOptional.get().isEnabled()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"LoginRequest.Email"}, "User is disabled");
+            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[] { "LoginRequest.Email" },
+                    "User is disabled");
         }
     }
 
@@ -75,7 +80,8 @@ public class AuthService {
         String passwordDto = registerRequest.getPassword();
 
         Role role = roleRepository.getRoleByName(RoleEnum.ROLE_USER)
-                .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[]{"Role"}, "Role not found"));
+                .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "Role" },
+                        "Role not found"));
         User user = User.builder()
                 .email(emailDto)
                 .password(passwordEncoder.encode(passwordDto))
@@ -89,30 +95,37 @@ public class AuthService {
 
     public void checkRegisterRequest(RegisterRequest registerRequest) {
         if (registerRequest.getEmail() == null || registerRequest.getEmail().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"RegisterRequest.Email"}, "Email must be not null");
+            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "RegisterRequest.Email" },
+                    "Email must be not null");
         }
         if (registerRequest.getPassword() == null || registerRequest.getPassword().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"RegisterRequest.Password"}, "Password must be not null");
+            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "RegisterRequest.Password" },
+                    "Password must be not null");
         }
         if (registerRequest.getConfirmPassword() == null || registerRequest.getConfirmPassword().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"RegisterRequest.ConfirmPassword"}, "ConfirmPassword must be not null");
+            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "RegisterRequest.ConfirmPassword" },
+                    "ConfirmPassword must be not null");
         }
 
         if (!registerRequest.getPassword().equals(registerRequest.getConfirmPassword())) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"RegisterRequest.Password"}, "Password and RegisterRequest.ConfirmPassword must be the same");
+            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[] { "RegisterRequest.Password" },
+                    "Password and RegisterRequest.ConfirmPassword must be the same");
         }
 
         if (userRepository.existsUserByEmail(registerRequest.getEmail())) {
-            throw new CoffeeShopException(Constant.FIELD_EXISTED, new Object[]{"RegisterRequest.Email"}, "Email is existed");
+            throw new CoffeeShopException(Constant.FIELD_EXISTED, new Object[] { "RegisterRequest.Email" },
+                    "Email is existed");
         }
     }
 
     public RespMessage getProfileByToken() {
         try {
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
             String email = userDetails.getUsername();
             User user = userRepository.findByEmail(email)
-                    .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[]{"User"}, "User not found when get profile by token"));
+                    .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "User" },
+                            "User not found when get profile by token"));
 
             UserDTO userDTO = UserDTO.builder()
                     .name(user.getName())
@@ -125,27 +138,30 @@ public class AuthService {
                     .build();
             return messageBuilder.buildSuccessMessage(userDTO);
 
-        }
-        catch(Exception e) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[]{"Token"}, "Token is null or not valid");
+        } catch (Exception e) {
+            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "Token" },
+                    "Token is null or not valid");
         }
     }
 
     public RespMessage refreshAccessToken(String refreshToken) {
 
         if (refreshToken == null || !refreshToken.startsWith("Bearer ")) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"RefreshToken"}, "Refresh token is missing or invalid");
+            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[] { "RefreshToken" },
+                    "Refresh token is missing or invalid");
         }
 
         refreshToken = refreshToken.substring(7);
 
         if (!jwtTokenProvider.validateToken(refreshToken)) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"RefreshToken"}, "Invalid refresh token");
+            throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[] { "RefreshToken" },
+                    "Invalid refresh token");
         }
 
         String username = jwtTokenProvider.getUsername(refreshToken);
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[]{"User"}, "User not found for provided refresh token"));
+        // User user = userRepository.findByEmail(username)
+        // .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new
+        // Object[]{"User"}, "User not found for provided refresh token"));
 
         String newAccessToken = jwtTokenProvider.generateAccessToken(username);
         String newRefreshToken = jwtTokenProvider.generateRefreshToken(username);
@@ -155,39 +171,53 @@ public class AuthService {
                 .respDesc("Access token refreshed successfully")
                 .data(Map.of(
                         "accessToken", newAccessToken,
-                        "refreshToken", newRefreshToken
-                ))
+                        "refreshToken", newRefreshToken))
                 .build();
     }
 
     // public RespMessage changePassword(ChangePasswordDTO changePasswordDTO) {
-    //     checkChangePasswordDTO(changePasswordDTO);
-    //     UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    //     String email = userDetails.getUsername();
-    //     User user = userRepository.findByEmail(email)
-    //             .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[]{"User"}, "User not found when change password"));
+    // checkChangePasswordDTO(changePasswordDTO);
+    // UserDetails userDetails = (UserDetails)
+    // SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    // String email = userDetails.getUsername();
+    // User user = userRepository.findByEmail(email)
+    // .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new
+    // Object[]{"User"}, "User not found when change password"));
 
-    //     if (!passwordEncoder.matches(changePasswordDTO.getOldPassword(), user.getPassword())) {
-    //         throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"ChangePasswordDTO.OldPassword"}, "Old password not correct");
-    //     }
+    // if (!passwordEncoder.matches(changePasswordDTO.getOldPassword(),
+    // user.getPassword())) {
+    // throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new
+    // Object[]{"ChangePasswordDTO.OldPassword"}, "Old password not correct");
+    // }
 
-    //     user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
-    //     userRepository.save(user);
-    //     return messageBuilder.buildSuccessMessage("Update password successfully");
+    // user.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
+    // userRepository.save(user);
+    // return messageBuilder.buildSuccessMessage("Update password successfully");
     // }
 
     // private void checkChangePasswordDTO(ChangePasswordDTO changePasswordDTO) {
-    //     if (changePasswordDTO.getOldPassword() == null || changePasswordDTO.getOldPassword().isEmpty()) {
-    //         throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"ChangePasswordDTO.OldPassword"}, "Old password must be not null");
-    //     }
-    //     if (changePasswordDTO.getNewPassword() == null || changePasswordDTO.getNewPassword().isEmpty()) {
-    //         throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"ChangePasswordDTO.NewPassword"}, "New password must be not null");
-    //     }
-    //     if (changePasswordDTO.getConfirmPassword() == null || changePasswordDTO.getConfirmPassword().isEmpty()) {
-    //         throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[]{"ChangePasswordDTO.ConfirmPassword"}, "Confirm password must be not null");
-    //     }
-    //     if (!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getConfirmPassword())) {
-    //         throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new Object[]{"ChangePasswordDTO.NewPassword"}, "New password and confirm password must be the same");
-    //     }
+    // if (changePasswordDTO.getOldPassword() == null ||
+    // changePasswordDTO.getOldPassword().isEmpty()) {
+    // throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new
+    // Object[]{"ChangePasswordDTO.OldPassword"}, "Old password must be not null");
+    // }
+    // if (changePasswordDTO.getNewPassword() == null ||
+    // changePasswordDTO.getNewPassword().isEmpty()) {
+    // throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new
+    // Object[]{"ChangePasswordDTO.NewPassword"}, "New password must be not null");
+    // }
+    // if (changePasswordDTO.getConfirmPassword() == null ||
+    // changePasswordDTO.getConfirmPassword().isEmpty()) {
+    // throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new
+    // Object[]{"ChangePasswordDTO.ConfirmPassword"}, "Confirm password must be not
+    // null");
+    // }
+    // if
+    // (!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getConfirmPassword()))
+    // {
+    // throw new CoffeeShopException(Constant.FIELD_NOT_VALID, new
+    // Object[]{"ChangePasswordDTO.NewPassword"}, "New password and confirm password
+    // must be the same");
+    // }
     // }
 }

@@ -1,8 +1,5 @@
 package com.ptit.coffee_shop.controller;
 
-import java.util.Date;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +16,8 @@ import com.ptit.coffee_shop.common.Constant;
 import com.ptit.coffee_shop.common.GsonUtil;
 import com.ptit.coffee_shop.config.MessageBuilder;
 import com.ptit.coffee_shop.exception.CoffeeShopException;
-import com.ptit.coffee_shop.model.Content;
-import com.ptit.coffee_shop.model.Course;
+
 import com.ptit.coffee_shop.payload.request.ContentRequest;
-import com.ptit.coffee_shop.payload.request.CourseRequest;
 import com.ptit.coffee_shop.payload.response.RespMessage;
 import com.ptit.coffee_shop.service.ContentService;
 

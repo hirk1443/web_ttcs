@@ -61,9 +61,7 @@ export default function Player() {
 
         const dataResult = await contentResponse.json();
 
-        // Kiểm tra xem API có trả về thông tin chi tiết hay không
         if (dataResult.respCode === "000" && dataResult.data) {
-          console.log("Received details:", dataResult.data); // Log dữ liệu nhận được từ API
           setDetails(dataResult.data);
         } else {
           console.log("Details not found");

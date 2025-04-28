@@ -99,24 +99,20 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <div className="bg-gray-100 hidden md:w-1/2 md:flex items-center justify-center p-8">
-        <div className="w-96 h-80 ">
-          {/* <img src={img_login} alt="img-Login" className="" /> */}
-          <p className="text-lg font-sans mb-4 mt-12 text-center">
-            Tất cả khóa học đều miễn phí, bạn có thể đóng góp thêm tài liệu bằng
-            cách đăng nhập
-          </p>
-        </div>
+      <div className="bg-gray-100 hidden md:w-1/2 md:flex items-center justify-center p-8 relative">
+        <img
+          src="https://scontent-hkg1-1.xx.fbcdn.net/v/t39.30808-6/472709908_897151605955308_4165085234155109734_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_ohc=jVLw7isdT-8Q7kNvwF9UW4k&_nc_oc=Adkn1TUNWpMQpeGbuyppijgeVeLnjuAOQ0X05jpA0D44kvlPwcKmoBF7mcF2xn3yvIMvNO6nCIbe48AYRZb07RFF&_nc_zt=23&_nc_ht=scontent-hkg1-1.xx&_nc_gid=yeOuHGKuoe5jRzZt3uq0VA&oh=00_AfGKPKJj0xstuH2kD5aZrDC0iZONUBSalZdhtm9MMWlyJw&oe=68157EAA"
+          alt="img-Login"
+          className="absolute top-0 left-0 w-full h-full object-cover opacity-60" // Thêm opacity và object-cover
+        />
+        {/* <p className="text-lg font-sans mb-4 mt-12 text-center">
+          Tất cả khóa học đều miễn phí, bạn có thể đóng góp thêm tài liệu bằng
+          cách đăng nhập
+        </p> */}
       </div>
 
       <div className="bg-white md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
-          <div className="flex justify-center  ">
-            <Link to="/">
-              <Logo />
-            </Link>
-          </div>
-
           <div>
             <h1 className="text-3xl font-bold mt-12 text-center ">Đăng ký</h1>
 

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
-
 import { PiUserCircle } from "react-icons/pi";
-
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../store/userSlice";
@@ -80,6 +78,22 @@ const Header = () => {
           <Logo />
         </Link>
 
+        {/* Navigation Tabs */}
+        <div className="flex items-center space-x-6 ">
+          <Link
+            to="/"
+            className="text-xl font-medium text-white hover:text-teal-500 transition"
+          >
+            Bài học
+          </Link>
+          <Link
+            to="/document"
+            className="text-xl font-medium text-white hover:text-teal-500 transition"
+          >
+            Tài liệu
+          </Link>
+        </div>
+
         {/* Search Bar */}
         <div className="hidden lg:flex items-center w-full max-w-md ml-10">
           <div className="flex w-full rounded-full border border-gray-300 overflow-hidden focus-within:shadow-md">
@@ -102,13 +116,6 @@ const Header = () => {
 
         {/* User + Cart */}
         <div className="flex items-center space-x-4">
-          {/* Cart tab placeholder */}
-          {showCartTab && (
-            <div className="absolute top-12 -right-4 z-50 hidden md:block">
-              <CartTab items={carts} />
-            </div>
-          )}
-
           {/* User avatar or login */}
           {user?.id ? (
             <>

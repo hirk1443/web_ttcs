@@ -1,11 +1,9 @@
 package com.ptit.coffee_shop.payload.response;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.ptit.coffee_shop.model.Category;
 import com.ptit.coffee_shop.model.Course;
-import com.ptit.coffee_shop.model.Details;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
