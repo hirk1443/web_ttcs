@@ -5,7 +5,7 @@ const slides = [
   {
     id: 1,
     image:
-      "https://scontent-hkg1-1.xx.fbcdn.net/v/t39.30808-6/472709908_897151605955308_4165085234155109734_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_ohc=jVLw7isdT-8Q7kNvwF9UW4k&_nc_oc=Adkn1TUNWpMQpeGbuyppijgeVeLnjuAOQ0X05jpA0D44kvlPwcKmoBF7mcF2xn3yvIMvNO6nCIbe48AYRZb07RFF&_nc_zt=23&_nc_ht=scontent-hkg1-1.xx&_nc_gid=dExWxWubxs8HGJ9RDR9trw&oh=00_AfGxMhR1yFgDVtSmMC2w_AZZA2_n-jag9j92ewfmz0jA1A&oe=6815466A",
+      "https://scontent.fhan5-5.fna.fbcdn.net/v/t39.30808-6/472709908_897151605955308_4165085234155109734_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeFsugFwpXQl5MSj3Js-QoT9vgMWmnqHVcW-AxaaeodVxeK4bV8chZYg6D3qMAonDQs5qVWYyJo9T58JLfMs5uJz&_nc_ohc=rW53bA_9hQcQ7kNvwF0Cn4v&_nc_oc=AdkcpU6PIYp6ttAhzYZjzJx4apQKiw6ab-0sGYwaqG5bOXCxayHZmNmlxv_3U1w0Pu5vH5qBhRNumb8hyVS5V9d9&_nc_zt=23&_nc_ht=scontent.fhan5-5.fna&_nc_gid=ddGDoan2pg56RV3wyZVk0g&oh=00_AfIk5wVIU3RAdwYtHc4-u8gdDKs1VrMhoaRu4u5IIZj1XQ&oe=68289C6A",
   },
 ];
 

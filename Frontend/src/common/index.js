@@ -74,6 +74,11 @@ const summaryApi = {
     method: "GET",
   },
 
+  updateCourseById: {
+    url: `${backendDomain}/course/update/`,
+    method: "PUT",
+  },
+
   addCourse: {
     url: `${backendDomain}/course/add`,
     method: "POST",
@@ -114,6 +119,11 @@ const summaryApi = {
     method: "POST",
   },
 
+  updateDetailsById: {
+    url: `${backendDomain}/details/update`,
+    method: "PUT",
+  },
+
   //content
   getAllContent: {
     url: `${backendDomain}/content/all`,
@@ -138,6 +148,11 @@ const summaryApi = {
   getContentById: {
     url: `${backendDomain}/content`,
     method: "GET",
+  },
+
+  updateContentById: {
+    url: `${backendDomain}/content/`,
+    method: "PUT",
   },
 
   //user

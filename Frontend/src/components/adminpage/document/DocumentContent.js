@@ -55,13 +55,13 @@ const DocumentContent = () => {
       <TabPane tab="Tất cả tài liệu" key="1">
         <DocumentTable
           documents={documents}
-          setDocuments={setDocuments}
+          setDocuments={fetchAllDocuments}
         ></DocumentTable>
       </TabPane>
       <TabPane tab="Đang chờ duyệt" key="2">
         <DocumentTable
           documents={pendingDocuments}
-          setDocuments={setPendingDocuments}
+          setDocuments={fetchAllPendingDocuments}
         ></DocumentTable>
       </TabPane>
     </Tabs>

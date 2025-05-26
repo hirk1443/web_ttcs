@@ -37,8 +37,6 @@ const Profile = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [passwordForm] = Form.useForm();
 
-  const dispatch = useDispatch();
-
   if (loading || !user) {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -58,13 +56,16 @@ const Profile = () => {
   const handleSave = async (updatedData) => {
     const fetchUpdateProfile = async (data) => {
       setLoading(true);
-      const response = await fetchWithAuth(summaryApi.updateProfile.url, {
-        method: summaryApi.updateProfile.method,
-        body: JSON.stringify({
-          Name: data.name,
-          Phone: data.phone,
-        }),
-      });
+      const response = await fetchWithAuth(
+        summaryApi.processUser.url + user.id,
+        {
+          method: summaryApi.processUser.method,
+          body: JSON.stringify({
+            Name: data.name,
+            Phone: data.phone,
+          }),
+        }
+      );
       const updateRespData = await response.json();
       if (updateRespData.respCode === "000") {
         return updateRespData.data;
@@ -77,7 +78,9 @@ const Profile = () => {
     const respData = await fetchUpdateProfile(updatedData);
 
     if (respData) {
-      dispatch(setUser(respData));
+      message.success("Cập nhật thông tin thành công!");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      window.location.reload();
     }
     setLoading(false);
   };

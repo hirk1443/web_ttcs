@@ -67,13 +67,14 @@ const CourseTable = ({
     if (!currentCourse) form.resetFields();
   };
 
-  const showModal = (course = null) => {
+  const showModal = (course) => {
     setCurrentCourse(course);
     setIsModalVisible(true);
     if (course) {
       form.setFieldsValue({
         name: course.name,
         description: course.description,
+        teacher: course.teacher,
         category: course.category?.id,
       });
     } else {
@@ -138,6 +139,7 @@ const CourseTable = ({
       form.resetFields();
 
       closeModel();
+      setCurrentCourse(null);
       await fetchAllCourse();
     } catch (error) {
       console.error(error);
@@ -145,38 +147,42 @@ const CourseTable = ({
     }
   };
 
-  const handleUpdateCourse = (values) => {
-    const fetchUpdateCourse = async () => {
+  const handleUpdateCourse = async (values) => {
+    try {
+      const payload = {
+        name: values.name,
+        teacher: values.teacher,
+        categoryId: values.category,
+        description: values.description || "",
+        imageURL: currentCourse.imageURL,
+      };
+
       const response = await fetchWithAuth(
-        summaryApi.updateProduct.url + currentCourse.id,
+        summaryApi.updateCourseById.url + `${currentCourse.id}`,
         {
-          method: summaryApi.updateProduct.method,
+          method: summaryApi.updateCourseById.method,
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            Name: values.name,
-            Description: values.description,
-            BrandId: values.brand,
-            CategoryId: values.category,
-          }),
+          body: JSON.stringify(payload),
         }
       );
-      const data = await response.json();
-      if (data.respCode === "000" && data.data) {
-        const updatedProducts = courseList.map((courses) => {
-          if (courses.id === currentCourse.id) {
-            return data.data;
-          }
-          return courses;
-        });
-        setCourseList(updatedProducts);
-        closeModel();
-      } else {
-        console.log(data);
+
+      if (!response.ok) {
+        throw new Error("Thêm khóa học thất bại");
       }
-    };
-    fetchUpdateCourse();
+
+      message.success("Thêm khóa học thành công!");
+      form.resetFields();
+
+      closeModel();
+      setCurrentCourse(null);
+
+      await fetchAllCourse();
+    } catch (error) {
+      console.error(error);
+      message.error("Đã có lỗi xảy ra khi thêm khóa học");
+    }
   };
 
   const getColumnSearchProps = (dataIndex) => ({
@@ -333,7 +339,8 @@ const CourseTable = ({
             type="link"
             className="text-blue-500 hover:text-blue-400 flex items-center"
             onClick={() => {
-              message.error("Tính năng đang lười phát triển!");
+              setCurrentCourse(record);
+              showModal(record);
             }}
           >
             <RiEditLine className="mr-1 text-xl" /> Chỉnh sửa
@@ -428,7 +435,9 @@ const CourseTable = ({
           <Form.Item
             name="image"
             label="Ảnh khóa học"
-            rules={[{ required: true, message: "Trường này là bắt buộc!" }]}
+            rules={[
+              { required: imageURL != "", message: "Trường này là bắt buộc!" },
+            ]}
             valuePropName="fileList"
             getValueFromEvent={(e) => {
               if (Array.isArray(e)) {
@@ -449,14 +458,26 @@ const CourseTable = ({
               customRequest={handleUploadImage}
               listType="picture"
               maxCount={1}
+              disabled={currentCourse && currentCourse.imageURL && !imageURL} // Disable if image exists and no new image selected
             >
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">Tải ảnh lên đây</p>
-              <p className="ant-upload-hint">
-                Một lần và duy nhất, sau khi tải ảnh lên không thể hoàn tác
-              </p>
+              {/* Show existing image if available */}
+              {currentCourse && currentCourse.imageURL && !imageURL ? (
+                <img
+                  src={currentCourse.imageURL}
+                  alt="Current Course"
+                  style={{ width: "100%" }}
+                />
+              ) : (
+                <>
+                  <p className="ant-upload-drag-icon">
+                    <InboxOutlined />
+                  </p>
+                  <p className="ant-upload-text">Tải ảnh lên đây</p>
+                  <p className="ant-upload-hint">
+                    Một lần và duy nhất, sau khi tải ảnh lên không thể hoàn tác
+                  </p>
+                </>
+              )}
             </Dragger>
           </Form.Item>
 
