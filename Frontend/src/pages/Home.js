@@ -86,17 +86,17 @@ const Home = () => {
         <Header />
         <div className="mt-16"></div>
         {location.pathname !== "/profile" && <BreadcrumbNav />}
-        <main className="container mx-auto ">
+        <main className="container mx-auto px-4 py-6 bg-gray-50 rounded-lg shadow-sm">
           {location.pathname === "/" && (
             <>
-              <Slideshow />
-              <div className="flex flex-col md:flex-row mt-5">
-                <div className="md:w-2/6 lg:w-1/5 w-full md:pr-4">
+              <Slideshow className="rounded-xl shadow-lg overflow-hidden mb-6" />
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="md:w-2/6 lg:w-1/5 w-full">
                   <div className="sticky top-24">
                     {isCategoriesLoading ? (
-                      <div className="flex justify-center items-center h-screen">
+                      <div className="flex justify-center items-center h-40">
                         <LoadingOutlined
-                          style={{ fontSize: 48, color: "red" }}
+                          style={{ fontSize: 48, color: "#1890ff" }}
                           spin
                         />
                       </div>
@@ -105,22 +105,24 @@ const Home = () => {
                     )}
                   </div>
                 </div>
-                <div className="md:w-4/6 lg:w-4/5 w-full md:pl-4">
+                <div className="md:w-4/6 lg:w-4/5 w-full">
                   {isCourseLoading ? (
-                    <div className="flex justify-center items-center h-screen">
+                    <div className="flex justify-center items-center h-40">
                       <LoadingOutlined
-                        style={{ fontSize: 48, color: "red" }}
+                        style={{ fontSize: 48, color: "#1890ff" }}
                         spin
                       />
                     </div>
                   ) : (
-                    <ListCourses course={courses} title={"Tất cả khoá học"} />
+                    <div className="rounded-md shadow-md p-4 bg-white">
+                      <ListCourses course={courses} title={"Tất cả khoá học"} />
+                    </div>
                   )}
                 </div>
               </div>
             </>
           )}
-          <section className=" mb-8">
+          <section className="mt-10 mb-8">
             <Outlet />
             <ChatWidget />
           </section>

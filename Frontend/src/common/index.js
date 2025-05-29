@@ -1,6 +1,7 @@
 const backendDomain = "http://localhost:8080/api";
 
 const summaryApi = {
+  //common
   signUP: {
     url: `${backendDomain}/auth/register`,
     method: "POST",
@@ -37,6 +38,23 @@ const summaryApi = {
     url: `${backendDomain}/auth/refresh-token`,
     method: "POST",
   },
+
+  uploadImage: {
+    url: `${backendDomain}/image/upload`,
+    method: "POST",
+  },
+
+  uploadDocument: {
+    url: `${backendDomain}/file/upload`,
+    method: "POST",
+  },
+
+  getDetailsById: {
+    url: `${backendDomain}/details/by-id`,
+    method: "GET",
+  },
+
+  //course
   allCategory: {
     url: `${backendDomain}/category/all`,
     method: "GET",
@@ -45,118 +63,99 @@ const summaryApi = {
     url: `${backendDomain}/category`,
     method: "POST",
   },
-  allBrand: {
-    url: `${backendDomain}/brand/all`,
-    method: "GET",
-  },
-  addBrand: {
-    url: `${backendDomain}/brand`,
-    method: "POST",
-  },
+
   allCourse: {
     url: `${backendDomain}/course/all`,
     method: "GET",
   },
-  addProduct: {
-    url: `${backendDomain}/product`,
-    method: "POST",
-  },
-  updateProduct: {
-    url: `${backendDomain}/product/`,
-    method: "PUT",
-  },
-  deleteProduct: {
-    url: `${backendDomain}/product/`,
-    method: "DELETE",
-  },
-  updateCartItem: {
-    url: `${backendDomain}/cart/item`,
-    method: "PUT",
-  },
-  getAllCartItems: {
-    url: `${backendDomain}/cart/user/`,
-    method: "GET",
-  },
-  addCartItem: {
-    url: `${backendDomain}/cart/item`,
-    method: "POST",
-  },
-  deleteCartItem: {
-    url: `${backendDomain}/cart/item/`,
-    method: "DELETE",
-  },
-  getAddressByUser: {
-    url: `${backendDomain}/address`,
-    method: "GET",
-  },
-  addShippingAddress: {
-    url: `${backendDomain}/address`,
-    method: "POST",
-  },
-  updateShippingAddress: {
-    url: `${backendDomain}/address`,
-    method: "PUT",
-  },
-  deleteShippingAddress: {
-    url: `${backendDomain}/address/`,
-    method: "DELETE",
-  },
 
-  productDetails: {
-    url: `${backendDomain}/product/`,
-    method: "GET",
-  },
-  productItem: {
-    url: `${backendDomain}/product-item/`,
-    method: "GET",
-  },
-  addProductItem: {
-    url: `${backendDomain}/product-item`,
-    method: "POST",
-  },
-  updateProductItem: {
-    url: `${backendDomain}/product-item/`,
-    method: "PUT",
-  },
-  deleteProductItem: {
-    url: `${backendDomain}/product-item/`,
-    method: "DELETE",
-  },
-
-  createRefund: {
-    url: `${backendDomain}/payment`,
-    method: "POST",
-  },
-
-  createOnlinePayment: {
-    url: `${backendDomain}/payment`,
+  getCourseById: {
+    url: `${backendDomain}/course/courseId`,
     method: "GET",
   },
 
-  addOrder: {
-    url: `${backendDomain}/order`,
+  updateCourseById: {
+    url: `${backendDomain}/course/update/`,
+    method: "PUT",
+  },
+
+  addCourse: {
+    url: `${backendDomain}/course/add`,
     method: "POST",
   },
-  addReview: {
-    url: `${backendDomain}/review`,
-    method: "POST",
-  },
-  deleteReview: {
-    url: `${backendDomain}/review/`,
+  deleteCourse: {
+    url: `${backendDomain}/course/delete/`,
     method: "DELETE",
   },
-  getUserOrders: {
-    url: `${backendDomain}/order/user/all`,
+
+  searchCourse: {
+    url: `${backendDomain}/course/search`,
     method: "GET",
   },
-  getProfile: {
-    url: `${backendDomain}/profile`,
+
+  getCourseByCategory: {
+    url: `${backendDomain}/course/category/`,
     method: "GET",
   },
-  uploadAvatarProfile: {
-    url: `${backendDomain}/profile/avatar`,
+
+  //Details
+  getDetailsByCourse: {
+    url: `${backendDomain}/details/by-course`,
+    method: "GET",
+  },
+
+  getAlLDetails: {
+    url: `${backendDomain}/details/all`,
+    method: "GET",
+  },
+
+  deleteDetails: {
+    url: `${backendDomain}/details/delete`,
+    method: "DELETE",
+  },
+
+  addDetails: {
+    url: `${backendDomain}/details/add`,
     method: "POST",
   },
+
+  updateDetailsById: {
+    url: `${backendDomain}/details/update`,
+    method: "PUT",
+  },
+
+  //content
+  getAllContent: {
+    url: `${backendDomain}/content/all`,
+    method: "GET",
+  },
+
+  addContent: {
+    url: `${backendDomain}/content/add`,
+    method: "POST",
+  },
+
+  deleteContent: {
+    url: `${backendDomain}/content/delete`,
+    method: "DELETE",
+  },
+
+  getContentByDetailsId: {
+    url: `${backendDomain}/content/by-details`,
+    method: "GET",
+  },
+
+  getContentById: {
+    url: `${backendDomain}/content`,
+    method: "GET",
+  },
+
+  updateContentById: {
+    url: `${backendDomain}/content/`,
+    method: "PUT",
+  },
+
+  //user
   getAllUsers: {
     url: `${backendDomain}/user/all`,
     method: "GET",
@@ -165,114 +164,44 @@ const summaryApi = {
     url: `${backendDomain}/user/`,
     method: "PUT",
   },
-  searchCourse: {
-    url: `${backendDomain}/course/search`,
-    method: "GET",
-  },
 
-  addFavorite: {
-    url: `${backendDomain}/favorites`,
-    method: "POST",
-  },
-  allFavorites: {
-    url: `${backendDomain}/favorites/`,
-    method: "GET",
-  },
-  deleteFavorites: {
-    url: `${backendDomain}/favorites`,
-    method: "DELETE",
-  },
-  addType: {
-    url: `${backendDomain}/type-product`,
-    method: "POST",
-  },
-  getAllType: {
-    url: `${backendDomain}/type-product/all`,
-    method: "GET",
-  },
-  addTransaction: {
-    url: `${backendDomain}/transaction`,
-    method: "POST",
-  },
-  getCourseByCategory: {
-    url: `${backendDomain}/course/category/`,
-    method: "GET",
-  },
   updateProfile: {
     url: `${backendDomain}/profile`,
     method: "PUT",
   },
-  getReviewByProductId: {
-    url: `${backendDomain}/review/product/`,
-    method: "GET",
-  },
-  uploadProductImage: {
-    url: `${backendDomain}/product/`,
-    method: "POST",
-  },
-  deleteProductImage: {
-    url: `${backendDomain}/product/image/`,
-    method: "DELETE",
-  },
-  getAllOrder: {
-    url: `${backendDomain}/order/get-all`,
-    method: "GET",
-  },
-  getOrderByStatus: {
-    url: `${backendDomain}/order/status/`,
-    method: "GET",
-  },
-  updateOrderStatus: {
-    url: `${backendDomain}/order/`,
-    method: "PUT",
-  },
-  getTop5MonthlySellingProduct: {
-    url: `${backendDomain}/statistic/product/monthly`,
-    method: "GET",
-  },
-  getTop5BestSellingProduct: {
-    url: `${backendDomain}/statistic/product`,
-    method: "GET",
-  },
-  getTop5MonthlyUsers: {
-    url: `${backendDomain}/statistic/user/monthly`,
-    method: "GET",
-  },
+
   getUsersStatistic: {
     url: `${backendDomain}/statistic/user`,
     method: "GET",
   },
-  getAllBrand: {
-    url: `${backendDomain}/brand/all`,
+
+  //document
+
+  getAllDocument: {
+    url: `${backendDomain}/document/all`,
     method: "GET",
   },
-  deleteBrand: {
-    url: `${backendDomain}/brand`,
-    method: "DELETE",
-  },
-  updateBrand: {
-    url: `${backendDomain}/brand`,
-    method: "PUT",
-  },
-  updateCategory: {
-    url: `${backendDomain}/category`,
-    method: "PUT",
-  },
-  deleteCategory: {
-    url: `${backendDomain}/category`,
-    method: "DELETE",
-  },
-  getOrderDetails: {
-    url: `${backendDomain}/order`,
+  getDocumentByUserId: {
+    url: `${backendDomain}/document/by-id`,
     method: "GET",
   },
-  cancelOrder: {
-    url: `${backendDomain}/order/cancel-order/`,
-    method: "PUT",
+  getDocumentByStatus: {
+    url: `${backendDomain}/document/all/status`,
+    method: "GET",
   },
-  cancelOrderAndRefund: {
-    url: `${backendDomain}/payment`,
+
+  addDocument: {
+    url: `${backendDomain}/document/add`,
     method: "POST",
+  },
+  changeDocumentStatus: {
+    url: `${backendDomain}/document/change`,
+    method: "PUT",
+  },
+
+  deleteDocument: {
+    url: `${backendDomain}/document/delete`,
+    method: "DELETE",
   },
 };
 
