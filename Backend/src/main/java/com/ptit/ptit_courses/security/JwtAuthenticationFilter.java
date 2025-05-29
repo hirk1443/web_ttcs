@@ -17,7 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.payload.response.RespMessage;
 
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), null, e.getMessage());
             request.setAttribute("exception", respMessage);
         } catch (Exception e) {

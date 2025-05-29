@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import com.ptit.ptit_courses.common.Constant;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.User;
 import com.ptit.ptit_courses.payload.response.LoginResponse;
 import com.ptit.ptit_courses.service.UserService;
@@ -37,7 +37,7 @@ public class JwtTokenProvider {
         String username = authentication.getName();
         Optional<User> user = userService.getUserByEmail(username);
         if (user.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "User email" }, "User not found");
+            throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "User email" }, "User not found");
         }
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + jwtExpirationDate);
@@ -86,15 +86,15 @@ public class JwtTokenProvider {
                     .parseClaimsJws(token);
             return true;
         } catch (MalformedJwtException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "Invalid JWT token");
+            throw new PtitCoursesException(Constant.UNAUTHORIZED, null, "Invalid JWT token");
         } catch (ExpiredJwtException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "Expired JWT token");
+            throw new PtitCoursesException(Constant.UNAUTHORIZED, null, "Expired JWT token");
         } catch (UnsupportedJwtException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "Unsupported JWT token");
+            throw new PtitCoursesException(Constant.UNAUTHORIZED, null, "Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "JWT claims string is empty.");
+            throw new PtitCoursesException(Constant.UNAUTHORIZED, null, "JWT claims string is empty.");
         } catch (Exception ex) {
-            throw new CoffeeShopException(Constant.UNAUTHORIZED, null, "JWT token is invalid: " + ex.getMessage());
+            throw new PtitCoursesException(Constant.UNAUTHORIZED, null, "JWT token is invalid: " + ex.getMessage());
         }
     }
 

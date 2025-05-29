@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.enums.DocumentStatusEnum;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.Category;
 import com.ptit.ptit_courses.model.Document;
 import com.ptit.ptit_courses.model.User;
@@ -88,13 +88,13 @@ public class DocumentService {
         try {
             Optional<User> author = userRepository.findById(request.getUserId());
             if (author.isEmpty()) {
-                throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
                         "user not found");
             }
             Optional<Category> category = categoryRepository
                     .findById(request.getCategoryId());
             if (category.isEmpty()) {
-                throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
                         "category not found");
             }
 
@@ -111,7 +111,7 @@ public class DocumentService {
             return messageBuilder.buildSuccessMessage(new Object[] { "Add document successfully" });
 
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when add document");
         }
     }
@@ -120,7 +120,7 @@ public class DocumentService {
         try {
             Optional<Document> document = documentRepository.findById(documentId);
             if (document.isEmpty()) {
-                throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
                         "document not found");
             }
             Document newDocs = document.get();
@@ -129,7 +129,7 @@ public class DocumentService {
             return messageBuilder.buildSuccessMessage(new Object[] { "change document successfully" });
 
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when add document");
         }
     }
@@ -138,7 +138,7 @@ public class DocumentService {
         try {
             Optional<Document> document = documentRepository.findById(documentId);
             if (document.isEmpty()) {
-                throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
                         "document not found");
             }
 
@@ -146,7 +146,7 @@ public class DocumentService {
             return messageBuilder.buildSuccessMessage(new Object[] { "delete document successfully" });
 
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when delete document");
         }
     }

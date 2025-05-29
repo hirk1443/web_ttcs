@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.enums.Status;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.User;
 import com.ptit.ptit_courses.payload.request.UserRequest;
 import com.ptit.ptit_courses.payload.response.RespMessage;
@@ -48,7 +48,7 @@ public class UserService {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = userDetails.getUsername();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "User" },
+                .orElseThrow(() -> new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "User" },
                         "User not found when change password"));
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
@@ -80,8 +80,8 @@ public class UserService {
             try {
                 userRepository.save(user);
                 return messageBuilder.buildSuccessMessage(newUserDTO);
-            } catch (CoffeeShopException e) {
-                throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { "user" },
+            } catch (PtitCoursesException e) {
+                throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { "user" },
                         "User could not be banned");
             }
         }
@@ -103,8 +103,8 @@ public class UserService {
             try {
                 userRepository.save(user);
                 return messageBuilder.buildSuccessMessage(updatedUserDTO);
-            } catch (CoffeeShopException e) {
-                throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { "user" },
+            } catch (PtitCoursesException e) {
+                throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { "user" },
                         "User could not be unbanned");
             }
         }
@@ -115,7 +115,7 @@ public class UserService {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String email = userDetails.getUsername();
         User currentUser = userRepository.findByEmail(email)
-                .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "User" },
+                .orElseThrow(() -> new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "User" },
                         "User not found when change password"));
         currentUser.setName(updatedUser.getName());
         currentUser.setPhone(updatedUser.getPhone());
@@ -124,8 +124,8 @@ public class UserService {
         try {
             userRepository.save(currentUser);
             return messageBuilder.buildSuccessMessage(updatedUser);
-        } catch (CoffeeShopException e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { "user" },
+        } catch (PtitCoursesException e) {
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { "user" },
                     "UserInfo could not be updated");
         }
     }

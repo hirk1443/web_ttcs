@@ -18,7 +18,7 @@ import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.GsonUtil;
 import com.ptit.ptit_courses.common.enums.DocumentStatusEnum;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.payload.request.DocumentRequest;
 import com.ptit.ptit_courses.payload.response.RespMessage;
 import com.ptit.ptit_courses.service.DocumentService;
@@ -46,7 +46,7 @@ public class DocumentController {
             RespMessage respMessage = documentService.getAllDocument();
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
                     HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
@@ -67,7 +67,7 @@ public class DocumentController {
             RespMessage respMessage = documentService.getDocumentbyUserId(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
                     HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
@@ -87,7 +87,7 @@ public class DocumentController {
             DocumentStatusEnum statusEnum = DocumentStatusEnum.fromString(status);
             RespMessage respMessage = documentService.getDocumentByStatus(statusEnum);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
@@ -103,7 +103,7 @@ public class DocumentController {
         try {
             RespMessage respMessage = documentService.addDocument(request);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
@@ -121,7 +121,7 @@ public class DocumentController {
             DocumentStatusEnum statusEnum = DocumentStatusEnum.fromString(status);
             RespMessage respMessage = documentService.changeDocumentStatus(id, statusEnum);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
@@ -139,7 +139,7 @@ public class DocumentController {
 
             RespMessage respMessage = documentService.deleteDocument(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);

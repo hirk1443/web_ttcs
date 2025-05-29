@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.Content;
 import com.ptit.ptit_courses.model.Details;
 import com.ptit.ptit_courses.payload.request.ContentRequest;
@@ -55,7 +55,7 @@ public class ContentService {
     public RespMessage deleteContent(Long id) {
         Optional<Content> contentOptional = contentRepository.findById(id);
         if (contentOptional.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "content" }, "Content not found");
+            throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "content" }, "Content not found");
         } else {
             Content content = contentOptional.get();
             try {
@@ -82,7 +82,7 @@ public class ContentService {
         try {
             contentRepository.save(content);
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when add course");
         }
         return messageBuilder.buildSuccessMessage(new Object[] { "add course suceesfully" });

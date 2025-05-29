@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.GsonUtil;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.payload.response.RespMessage;
 import com.ptit.ptit_courses.service.CloudinaryService;
 
@@ -42,7 +42,7 @@ public class FileController {
             RespMessage respMessage = cloudinaryService.uploadDocument(file, "documents");
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
                     HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),

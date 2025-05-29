@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.enums.RoleEnum;
 import com.ptit.ptit_courses.common.enums.Status;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.Role;
 import com.ptit.ptit_courses.model.User;
 import com.ptit.ptit_courses.repository.RoleRepository;
@@ -44,7 +44,7 @@ public class DataInitializer implements CommandLineRunner {
             admin.setEmail(adminEmail);
             admin.setPassword(passwordEncoder.encode(adminPassword));
             Role role = roleRepository.getRoleByName(RoleEnum.ROLE_ADMIN)
-                    .orElseThrow(() -> new CoffeeShopException(Constant.FIELD_NOT_FOUND,
+                    .orElseThrow(() -> new PtitCoursesException(Constant.FIELD_NOT_FOUND,
                             new Object[] { "DataInitializer.run" }, "Role Admin not found"));
             admin.setRole(role);
             admin.setStatus(Status.ACTIVE);

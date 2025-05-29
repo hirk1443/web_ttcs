@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.GsonUtil;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.payload.request.UserRequest;
 import com.ptit.ptit_courses.payload.response.RespMessage;
 import com.ptit.ptit_courses.service.UserService;
@@ -28,7 +28,7 @@ public class UserController {
         try {
             RespMessage respMessage = userService.getAllUsers();
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class UserController {
         try {
             RespMessage respMessage = userService.banUser(userId);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class UserController {
         try {
             RespMessage respMessage = userService.unbanUser(userId);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class UserController {
         try {
             RespMessage respMessage = userService.updateUserInfo(updatedUser);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.GsonUtil;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.payload.request.ContentRequest;
 import com.ptit.ptit_courses.payload.response.RespMessage;
 import com.ptit.ptit_courses.service.ContentService;
@@ -38,7 +38,7 @@ public class ContentController {
             RespMessage respMessage = contentService.getAllContent();
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
                     HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(),
                     e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage),
@@ -58,7 +58,7 @@ public class ContentController {
         try {
             RespMessage respMessage = contentService.addContent(request);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class ContentController {
         try {
             RespMessage respMessage = contentService.deleteContent(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -87,7 +87,7 @@ public class ContentController {
         try {
             RespMessage respMessage = contentService.getContentByDetailsId(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -101,7 +101,7 @@ public class ContentController {
         try {
             RespMessage respMessage = contentService.getContentById(id);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage respMessage = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {

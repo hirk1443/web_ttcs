@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.Course;
 import com.ptit.ptit_courses.payload.request.CourseRequest;
 import com.ptit.ptit_courses.payload.response.CourseDTO;
@@ -41,25 +41,25 @@ public class CourseService {
 
     public RespMessage addCourse(CourseRequest courseRequest) {
         if (courseRequest.getName() == null || courseRequest.getName().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
                     "Course name must be not null");
         }
         if (courseRequest.getCategoryId() <= 0) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "categoryId" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "categoryId" },
                     "invalid category id");
         }
         if (courseRequest.getTeacher() == null || courseRequest.getTeacher().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "teacher" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "teacher" },
                     "Teacher name must be not null");
         }
         if (courseRequest.getImageURL() == null || courseRequest.getImageURL().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "imageUrl" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "imageUrl" },
                     "ImageURL name must be not null");
         }
         Optional<com.ptit.ptit_courses.model.Category> categoryOptional = categoryRepository
                 .findById(courseRequest.getCategoryId());
         if (categoryOptional.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "category" }, "invalid category id");
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "category" }, "invalid category id");
         }
         Course course = new Course();
         course.setName(courseRequest.getName());
@@ -71,7 +71,7 @@ public class CourseService {
         try {
             courseRepository.save(course);
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when add course");
         }
         return messageBuilder.buildSuccessMessage(new Object[] { "add course suceesfully" });
@@ -79,15 +79,15 @@ public class CourseService {
 
     public RespMessage updateCourse(CourseRequest courseRequest, Long courseId) {
         if (courseRequest.getName() == null || courseRequest.getName().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
                     "Course name must be not null");
         }
         if (courseRequest.getCategoryId() <= 0) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "categoryId" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "categoryId" },
                     "invalid category id");
         }
         if (courseRequest.getTeacher() == null || courseRequest.getTeacher().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "teacher" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "teacher" },
                     "Teacher name must be not null");
         }
         // if (courseRequest.getImageURL() == null ||
@@ -99,11 +99,11 @@ public class CourseService {
         Optional<com.ptit.ptit_courses.model.Category> categoryOptional = categoryRepository
                 .findById(courseRequest.getCategoryId());
         if (categoryOptional.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "category" }, "invalid category id");
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "category" }, "invalid category id");
         }
         Optional<Course> courseOptional = courseRepository.findById(courseId);
         if (!courseOptional.isPresent()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "Course" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "Course" },
                     "Course Not Found");
         }
         Course course = courseOptional.get();
@@ -119,7 +119,7 @@ public class CourseService {
         try {
             courseRepository.save(course);
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when add course");
         }
         return messageBuilder.buildSuccessMessage(new Object[] { "add course suceesfully" });
@@ -167,7 +167,7 @@ public class CourseService {
     public RespMessage deleteCourse(Long id) {
         Optional<Course> courseOptional = courseRepository.findById(id);
         if (courseOptional.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "course" }, "Course not found");
+            throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "course" }, "Course not found");
         } else {
             Course course = courseOptional.get();
             try {

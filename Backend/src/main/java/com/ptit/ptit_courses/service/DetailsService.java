@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.model.Course;
 import com.ptit.ptit_courses.model.Details;
 import com.ptit.ptit_courses.payload.request.DetailsRequest;
@@ -36,22 +36,22 @@ public class DetailsService {
 
     public RespMessage addDetails(DetailsRequest detailsRequest) {
         if (detailsRequest.getCourseId() == null) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
                     "Course Id must be not null");
         }
 
         if (detailsRequest.getImageURL() == null || detailsRequest.getImageURL().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "imageUrl" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "imageUrl" },
                     "ImageURL name must be not null");
         }
         if (detailsRequest.getName() == null || detailsRequest.getName().isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "name" },
                     "Details name must be not null");
         }
 
         Optional<Course> courseOptional = courseRepository.findById(detailsRequest.getCourseId());
         if (courseOptional.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] { "category" }, "Course Not Found");
+            throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "category" }, "Course Not Found");
         }
         Details details = new Details();
         details.setName(detailsRequest.getName());
@@ -63,7 +63,7 @@ public class DetailsService {
         try {
             detailsRepository.save(details);
         } catch (Exception e) {
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when add details");
         }
         return messageBuilder.buildSuccessMessage(new Object[] { "Add details successfully" });
@@ -90,7 +90,7 @@ public class DetailsService {
     public RespMessage getDetailsById(Long id) {
         Optional<Details> details = detailsRepository.findById(id);
         if (details.isEmpty()) {
-            throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+            throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
                     "Details not found");
         }
         DetailsDTO detailsDTO = new DetailsDTO(details.get());
@@ -101,7 +101,7 @@ public class DetailsService {
         try {
             Optional<Details> detailsOption = detailsRepository.findById(id);
             if (detailsOption.isEmpty()) {
-                throw new CoffeeShopException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
+                throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "details" },
                         "Details not found");
 
             } else {
@@ -111,7 +111,7 @@ public class DetailsService {
             }
         } catch (Exception e) {
 
-            throw new CoffeeShopException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { e.getMessage() },
                     "Error when delete details");
         }
     }

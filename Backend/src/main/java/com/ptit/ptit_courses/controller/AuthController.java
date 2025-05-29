@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ptit.ptit_courses.common.Constant;
 import com.ptit.ptit_courses.common.GsonUtil;
 import com.ptit.ptit_courses.config.MessageBuilder;
-import com.ptit.ptit_courses.exception.CoffeeShopException;
+import com.ptit.ptit_courses.exception.PtitCoursesException;
 import com.ptit.ptit_courses.payload.request.LoginRequest;
 import com.ptit.ptit_courses.payload.request.RegisterRequest;
 import com.ptit.ptit_courses.payload.response.RespMessage;
@@ -27,7 +27,7 @@ public class AuthController {
         try {
             RespMessage response = authService.login(loginRequest);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage resp = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(resp), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class AuthController {
         try {
             RespMessage response = authService.register(registerRequest);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage response = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class AuthController {
         try {
             RespMessage response = authService.getProfileByToken();
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.OK);
-        } catch (CoffeeShopException e) {
+        } catch (PtitCoursesException e) {
             RespMessage response = messageBuilder.buildFailureMessage(e.getCode(), e.getObjects(), e.getMessage());
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(response), HttpStatus.BAD_REQUEST);
         }
