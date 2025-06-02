@@ -31,7 +31,7 @@ public class CommentController {
     private MessageBuilder messageBuilder;
 
     @GetMapping("/get-comment/{contentId}")
-    public ResponseEntity<String> getDetailsByCourse(@PathVariable long contentId) {
+    public ResponseEntity<String> getCommentByContentId(@PathVariable long contentId) {
         try {
             RespMessage respMessage = commentService.getCommentByContentId(contentId);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
@@ -50,7 +50,7 @@ public class CommentController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<String> addDetails(@RequestBody CommentRequest request) {
+    public ResponseEntity<String> addComment(@RequestBody CommentRequest request) {
         try {
             RespMessage respMessage = commentService.addComment(request);
             return new ResponseEntity<>(GsonUtil.getInstance().toJson(respMessage), HttpStatus.OK);
