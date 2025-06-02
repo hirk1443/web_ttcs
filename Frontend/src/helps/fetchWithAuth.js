@@ -20,7 +20,8 @@ const fetchWithAuth = async (url, options = {}, authRequired = true) => {
     ...options,
     headers,
   });
-  if (responseByAccessToken.respCode === "103") {
+  const responseData = await responseByAccessToken.clone().json();
+  if (responseData.respCode === "103") {
     const refreshToken = Cookies.get("refreshToken");
     if (refreshToken) {
       headers.Authorization = `Bearer ${refreshToken}`;

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import summaryApi from "../common";
 import VideoPlayer from "../components/layout/VideoPlayer";
 import VideoPlayerContentList from "../components/layout/VideoPlayerContentList";
+import CommentBox from "../components/layout/CommentBox";
 
 export default function Player() {
   const { detailsId, contentId } = useParams();
@@ -98,6 +99,9 @@ export default function Player() {
                     selectedContent={selectedContent}
                   />
                 </div>
+              </div>
+              <div className="mt-8 flex justify-center">
+                <CommentBox />
               </div>
             </div>
           </div>

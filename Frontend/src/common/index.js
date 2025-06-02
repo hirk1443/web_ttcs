@@ -1,4 +1,4 @@
-const backendDomain = "http://localhost:8080/api";
+const backendDomain = "http://26.95.145.236:8080/api";
 
 const summaryApi = {
   //common
@@ -201,6 +201,28 @@ const summaryApi = {
 
   deleteDocument: {
     url: `${backendDomain}/document/delete`,
+    method: "DELETE",
+  },
+
+  //comment
+  getAllComment: {
+    url: `${backendDomain}/comment/all`,
+    method: "GET",
+  },
+  getCommentByContentId: {
+    url: `${backendDomain}/comments/get-comment`,
+    method: "GET",
+  },
+  addComment: {
+    url: `${backendDomain}/comments/add`,
+    method: "POST",
+  },
+  updateComment: {
+    url: `${backendDomain}/comments/update`,
+    method: "PUT",
+  },
+  deleteComment: {
+    url: `${backendDomain}/comments/delete`,
     method: "DELETE",
   },
 };
