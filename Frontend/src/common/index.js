@@ -170,6 +170,11 @@ const summaryApi = {
     method: "PUT",
   },
 
+  uploadAvatarProfile: {
+    url: `${backendDomain}/user/avatar`,
+    method: "PUT",
+  },
+
   getUsersStatistic: {
     url: `${backendDomain}/statistic/user`,
     method: "GET",

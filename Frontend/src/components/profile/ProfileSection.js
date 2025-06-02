@@ -16,16 +16,20 @@ const ProfileSection = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetchWithAuth(summaryApi.uploadAvatarProfile.url, {
-        method: summaryApi.uploadAvatarProfile.method,
-        body: formData,
-      });
+      const response = await fetchWithAuth(
+        summaryApi.uploadAvatarProfile.url + `/${user.id}`,
+        {
+          method: summaryApi.uploadAvatarProfile.method,
+          body: formData,
+        }
+      );
 
       const data = await response.json();
 
       if (data.respCode === "000") {
         message.success("Ảnh đã được tải lên thành công!");
         dispatch(setUser(data.data));
+        window.location.reload();
       } else {
         message.error(data.message || "Tải ảnh thất bại.");
       }
@@ -71,9 +75,7 @@ const ProfileSection = () => {
             year: "numeric",
           })}
         </Text>
-
       )}
-
     </section>
   );
 };

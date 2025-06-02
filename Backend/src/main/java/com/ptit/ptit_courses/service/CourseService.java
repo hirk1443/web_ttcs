@@ -90,12 +90,7 @@ public class CourseService {
             throw new PtitCoursesException(Constant.FIELD_NOT_NULL, new Object[] { "teacher" },
                     "Teacher name must be not null");
         }
-        // if (courseRequest.getImageURL() == null ||
-        // courseRequest.getImageURL().isEmpty()) {
-        // throw new CoffeeShopException(Constant.FIELD_NOT_NULL, new Object[] {
-        // "imageUrl" },
-        // "ImageURL name must be not null");
-        // }
+
         Optional<com.ptit.ptit_courses.model.Category> categoryOptional = categoryRepository
                 .findById(courseRequest.getCategoryId());
         if (categoryOptional.isEmpty()) {

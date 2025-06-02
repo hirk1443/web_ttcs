@@ -129,4 +129,24 @@ public class UserService {
                     "UserInfo could not be updated");
         }
     }
+
+    public RespMessage updateAvatar(String Url, Long userId) {
+
+        try {
+            Optional<User> user = userRepository.findById(userId);
+            if (!user.isPresent()) {
+                throw new PtitCoursesException(Constant.FIELD_NOT_FOUND, new Object[] { "User" },
+                        "user not found");
+            }
+            User updatedUser = user.get();
+            updatedUser.setProfile_img(Url);
+            userRepository.save(updatedUser);
+
+            return messageBuilder.buildSuccessMessage("success");
+        } catch (Exception e) {
+            throw new PtitCoursesException(Constant.SYSTEM_ERROR, new Object[] { "user" },
+                    "UserInfo could not be updated");
+        }
+
+    }
 }
