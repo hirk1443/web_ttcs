@@ -32,7 +32,7 @@ export default function ContentList({ content }) {
                 >
                   <div className="flex items-center">
                     <Play size={16} className="mr-2 text-gray-500" />
-                    <span className="text-gray-700">Video chữa Phần 3</span>
+                    <span className="text-gray-700">Video bài giảng </span>
                   </div>
                   <span className="text-gray-500 text-sm">48:25</span>
                 </div>

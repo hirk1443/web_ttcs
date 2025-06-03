@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import summaryApi from "../common";
 import ListProduct from "../components/homepage/ListCourses";
 import { useParams } from "react-router-dom";
-import Filter from "../components/homepage/Filter";
+// import Filter from "../components/homepage/Filter";
 import { LoadingOutlined } from "@ant-design/icons";
 import CategoryCard from "../components/layout/CategoryCard";
 import ListCourses from "../components/homepage/ListCourses";

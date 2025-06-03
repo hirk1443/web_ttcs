@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import img_login from "../assets/img/img-login.png";
+import img_login from "../assets/img/login2.jpg";
 import Logo from "../components/layout/Logo";
 import { LoadingOutlined } from "@ant-design/icons";
 import summaryApi from "../common";
@@ -73,9 +73,9 @@ const SignIn = () => {
     <div className="flex flex-col md:flex-row h-screen">
       <div className="bg-gray-100 hidden md:w-1/2 md:flex items-center justify-center p-8 relative">
         <img
-          src="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/472709908_897151605955308_4165085234155109734_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=2285d6&_nc_eui2=AeFsugFwpXQl5MSj3Js-QoT9vgMWmnqHVcW-AxaaeodVxeK4bV8chZYg6D3qMAonDQs5qVWYyJo9T58JLfMs5uJz&_nc_ohc=q_XELk8ww78Q7kNvwEfURBf&_nc_oc=AdncRsLjRCxH0wJGlR5i0j-6DnV3xY9kwuO5V4eNeCiY3JNPF7nODkviV6V2aHf3lR9PgaleO8SH2sVRbq4oI-zi&_nc_zt=23&_nc_ht=scontent.fhan14-1.fna&_nc_gid=-FIRhle-hJV4eF5jjxs75g&oh=00_AfL2wFe5z8YmpTjNPfl6r7oLeBj0wZBpC0otnU03PIetKQ&oe=683B49AA"
+          src={img_login}
           alt="img-Login"
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-60" // Thêm opacity và object-cover
+          className="absolute top-0 left-0 w-full h-full object-cover " // Thêm opacity và object-cover
         />
         {/* <p className="text-lg font-sans mb-4 mt-12 text-center">
           Tất cả khóa học đều miễn phí, bạn có thể đóng góp thêm tài liệu bằng

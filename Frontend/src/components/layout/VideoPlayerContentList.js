@@ -1,10 +1,14 @@
 import { Play, Clock, FileText } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function VideoPlayerContentList({
   contentList,
   setSelectedContent,
   selectedContent,
 }) {
+  const navigate = useNavigate();
+  const { detailsId} = useParams();
   return (
     <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden">
       <div className="p-4 text-white flex items-center">
@@ -19,7 +23,8 @@ export default function VideoPlayerContentList({
               selectedContent.id === content.id ? "bg-gray-100" : "bg-white"
             }`}
             onClick={() => {
-              setSelectedContent(content);
+              // setSelectedContent(content);
+              navigate(`/details/${detailsId}/player/${content.id}`);
             }}
           >
             <div className="flex items-center">

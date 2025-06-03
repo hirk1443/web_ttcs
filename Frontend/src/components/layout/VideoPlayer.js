@@ -34,7 +34,7 @@ export default function VideoPlayer({ content }) {
         <div className="p-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold">Tài liệu đi kèm:</h3>
-            <span className="text-lg font-bold">Tải về</span>
+            {/* <span className="text-lg font-bold">Tải về</span> */}
           </div>
 
           <div className="mt-4 flex items-center text-blue-500">

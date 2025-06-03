@@ -20,17 +20,21 @@ const Filter = ({ onFilter, products, onClickFilter }) => {
   };
 
   const handleClickFilter = () => {
-    const filtered = products.filter((product) => {
-      const inPriceRange =
-        product.minPrice >= value[0] && product.minPrice <= value[1];
-      const matchesBrand = selectBrand.length
-        ? selectBrand.includes(product.brand.name)
-        : true;
-      return inPriceRange && matchesBrand;
-    });
-    onClickFilter();
-    onFilter(filtered);
-  };
+  if (!Array.isArray(products)) {
+    onFilter([]);
+    return;
+  }
+  const filtered = products.filter((product) => {
+    const inPriceRange =
+      product.minPrice >= value[0] && product.minPrice <= value[1];
+    const matchesBrand = selectBrand.length
+      ? selectBrand.includes(product.brand.name)
+      : true;
+    return inPriceRange && matchesBrand;
+  });
+  onClickFilter();
+  onFilter(filtered);
+};
 
   return (
     <div className="relative p-6 w-full bg-white rounded-lg shadow-xl ">
@@ -45,7 +49,7 @@ const Filter = ({ onFilter, products, onClickFilter }) => {
                 marginBottom: "1rem",
               }}
             >
-              Bạn muốn tim kiếm gì?
+              Bạn muốn tìm kiếm gì?
             </Typography>
           </Box>
           <RadioGroup
@@ -70,6 +74,7 @@ const Filter = ({ onFilter, products, onClickFilter }) => {
 
       <div className=" mt-10">
         <button
+          onClick={handleClickFilter}
           className="w-full p-2 text-white uppercase rounded-lg shadow-lg
            bg-gradient-to-r from-teal-500 via-teal-300 to-teal-500 transition-all 
            duration-500 ease-in-out bg-[length:200%_auto] hover:bg-[position:right_center]"

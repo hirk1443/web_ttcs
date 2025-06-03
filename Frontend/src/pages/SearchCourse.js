@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import summaryApi from "../common";
 import ListCourses from "../components/homepage/ListCourses";
-import Filter from "../components/homepage/Filter";
+// import Filter from "../components/homepage/Filter";
 import { Spin } from "antd";
 
 const SearchCourse = () => {
@@ -56,7 +56,7 @@ const SearchCourse = () => {
         <div className="grid grid-cols-12 lg:gap-x-10 gap-x-3">
           <div className="lg:col-span-3 md:col-span-4 col-span-12 mt-10 sm:min-h-screen">
             <div className="sticky top-28 ">
-              <Filter />
+              {/* <Filter /> */}
             </div>
           </div>
 

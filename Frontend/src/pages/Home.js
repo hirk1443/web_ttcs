@@ -13,7 +13,7 @@ import summaryApi from "../common";
 
 import BreadcrumbNav from "../components/layout/BreadcrumbNav";
 
-import ChatWidget from "../components/layout/ChatWidget";
+// import ChatWidget from "../components/layout/ChatWidget";
 
 const Home = () => {
   const location = useLocation();
@@ -124,7 +124,7 @@ const Home = () => {
           )}
           <section className="mt-10 mb-8">
             <Outlet />
-            <ChatWidget />
+            {/* <ChatWidget /> */}
           </section>
         </main>
         <Footer />
