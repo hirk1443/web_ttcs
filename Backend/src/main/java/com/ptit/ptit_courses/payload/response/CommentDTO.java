@@ -27,7 +27,7 @@ public class CommentDTO {
         userDTO.setName(c.getAuthor().getName());
         userDTO.setEmail(c.getAuthor().getEmail());
         userDTO.setPhone(c.getAuthor().getPhone());
-        userDTO.setProfile_img(userDTO.getProfile_img());
+        userDTO.setProfile_img(c.getAuthor().getProfile_img());
         userDTO.setStatus(c.getAuthor().getStatus().toString());
         this.author = userDTO;
         this.body = c.getBody();
